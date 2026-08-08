@@ -29,9 +29,9 @@ docker compose exec atak-dev doctor
 ```
 PLUGINS_DIR=/home/you/development/tak
                     |
-                    +-- atak-plugin-maproom      ->  /work/atak-plugin-maproom
-                    +-- atak-plugin-weather      ->  /work/atak-plugin-weather
-                    +-- my-plugin.worktrees/fix  ->  /work/my-plugin.worktrees/fix
+                    +-- atak-plugin-alpha        ->  /work/atak-plugin-alpha
+                    +-- atak-plugin-beta         ->  /work/atak-plugin-beta
+                    +-- alpha.worktrees/a-branch ->  /work/alpha.worktrees/a-branch
 ```
 
 Pointing at the parent rather than at one project is deliberate: several

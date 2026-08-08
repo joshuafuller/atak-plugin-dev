@@ -9,7 +9,6 @@
 
 set -uo pipefail
 
-PASS=0
 pass() { printf '  ok    %s\n' "$1"; }
 info() { printf '  --    %s\n' "$1"; }
 fail() {

@@ -1,0 +1,76 @@
+# Proves the image still builds for somebody who is not us. Deliberately has
+# no secrets and read-only permissions: a workflow is code, and a pull request
+# that can change it must not be able to use it.
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the image
+        # No SDK is needed: it is licensed material, mounted at runtime rather
+        # than baked in, so the image builds without it.
+        run: docker build -t atak-plugin-dev:ci .
+
+      - name: The toolchain is what the README claims
+        run: |
+          docker run --rm atak-plugin-dev:ci bash -lc '
+            set -e
+            java -version 2>&1 | head -1
+            test -d /opt/android-sdk/platforms/android-36
+            test -d /opt/android-sdk/platforms/android-34
+            test -d /opt/android-sdk/build-tools/36.0.0
+            command -v adb >/dev/null
+            command -v gh  >/dev/null
+            command -v rg  >/dev/null
+            echo "toolchain ok"
+          '
+
+      - name: doctor asks for the SDK rather than failing obscurely
+        # With no SDK mounted, the first check must fail with the instruction
+        # to obtain one. This is the first thing a new user sees.
+        run: |
+          out=$(docker run --rm -v "$PWD/workspace/bin:/opt/tak-bin:ro" \
+                  atak-plugin-dev:ci /opt/tak-bin/doctor 2>&1 || true)
+          echo "$out"
+          echo "$out" | grep -q "no SDK mounted" \
+            || { echo "::error::doctor did not report the missing SDK clearly"; exit 1; }
+          echo "$out" | grep -q "tak.gov" \
+            || { echo "::error::doctor did not say where to get the SDK"; exit 1; }
+
+  scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Shellcheck the helper scripts
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
+          shellcheck -S warning workspace/bin/deploy workspace/bin/instrument \
+                                workspace/bin/doctor bin/host-adb-server
+
+      - name: Compose file is valid
+        run: |
+          # Substituted so validation does not depend on a local .env.
+          ATAK_SDK_DIR=/tmp/sdk PLUGINS_DIR=/tmp/plugins \
+            docker compose config >/dev/null
+          echo "compose ok"
+
+      - name: No ATAK SDK material committed
+        run: |
+          if git ls-files | grep -qiE '\.(aar|apk|jar|keystore|so)$|android_keystore|atak-gradle-takdev'; then
+            echo "::error::SDK material or a binary artifact is committed"
+            git ls-files | grep -iE '\.(aar|apk|jar|keystore|so)$|android_keystore|atak-gradle-takdev'
+            exit 1
+          fi
+          echo "clean"

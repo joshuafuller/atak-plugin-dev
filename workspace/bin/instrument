@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run a plugin's instrumented tests, without Gradle's UTP device provider.
 #
-#   /work/bin/instrument MapRoom [TestClass#method]
+#   /work/bin/instrument MyPlugin [TestClass#method]
 #
 # Why not ./gradlew connectedCivDebugAndroidTest: the Unified Test Platform
 # starts its own JVM whose ddmlib fails with "Failed to initialize

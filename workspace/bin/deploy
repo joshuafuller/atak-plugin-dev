@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build a plugin and put it on the device. Run inside the container:
 #
-#   /work/bin/deploy MapRoom
+#   /work/bin/deploy MyPlugin
 #
 # Does the three things that are easy to forget: installs the APK, drops a copy
 # in ATAK's sideload folder so Sync Packages can see it, and removes any stale
@@ -13,7 +13,7 @@ VARIANT="${2:-CivDebug}"
 SIDELOAD=/sdcard/atak/support/apks/sideloaded
 
 if [[ -z "$PROJECT" ]]; then
-    echo "usage: deploy <project-dir> [variant]   e.g. deploy MapRoom CivDebug" >&2
+    echo "usage: deploy <project-dir> [variant]   e.g. deploy MyPlugin CivDebug" >&2
     exit 2
 fi
 
