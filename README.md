@@ -167,17 +167,20 @@ the sideload folder, or Sync Packages will show a phantom second product.
 
 ---
 
-## What the sample plugin does so far
+## Where plugins live
 
-`workspace/MapRoom` reads the [ATAK-Maps](https://github.com/joshuafuller/ATAK-Maps)
-catalogue bundled in its own assets and writes the sources into
-`/atak/imagery`. After that ATAK lists all 33 of them:
+Each plugin is its own repository, cloned into `workspace/` — which is mounted
+at `/work` and is otherwise ignored by this repo. Nothing under `workspace/`
+belongs to the container except `workspace/bin`.
 
-![ATAK's Mobile Imagery list showing the installed catalogue](docs/images/installed-sources.png)
+```bash
+git clone <your-plugin-repo> workspace/MyPlugin
+docker compose exec atak-dev /work/bin/deploy MyPlugin
+```
 
-And they draw — this is Bing Satellite, selected from that list:
-
-![Bing satellite imagery rendering in ATAK](docs/images/rendering.png)
+A worked example, built with this container:
+[Map Room](workspace/MapRoom) — installs a catalogue of map sources and
+gets them rendering in ATAK.
 
 ## Testing
 

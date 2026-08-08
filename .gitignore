@@ -1,7 +1,6 @@
-# Build output and local machine state — never committed.
-workspace/*/build/
-workspace/*/app/build/
-workspace/*/.gradle/
-workspace/*/.takdev/
-workspace/*/local.properties
+# workspace/ is where plugin repos get cloned. Each plugin is its own repo, so
+# nothing in here belongs to the container except the helper scripts.
+workspace/*
+!workspace/bin/
+
 .env
