@@ -1,0 +1,7 @@
+# Build output and local machine state — never committed.
+workspace/*/build/
+workspace/*/app/build/
+workspace/*/.gradle/
+workspace/*/.takdev/
+workspace/*/local.properties
+.env

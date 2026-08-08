@@ -1,0 +1,32 @@
+# ATAK plugin dev box.
+#
+#   docker compose up -d --build
+#   docker compose exec atak-dev bash
+#
+# host networking so adb reaches the emulator already running on the host
+# (adb server on 127.0.0.1:5037) without any port juggling.
+
+services:
+  atak-dev:
+    build: .
+    container_name: atak-dev
+    network_mode: host
+    working_dir: /work
+    volumes:
+      # The plugin source we are actually working on.
+      - ./workspace:/work
+      # ATAK SDK — licensed material, mounted rather than baked in. Writable: the
+      # takdev gradle plugin writes mapping.txt into it during the build.
+      - /home/user/development/tak/ATAK-CIV-5.8.0.1-SDK:/opt/atak-sdk
+      # Persist the gradle cache across container rebuilds.
+      - gradle-cache:/home/dev/.gradle
+      # Reuse the host's adb keys so the emulator does not re-prompt.
+      - /home/user/.android:/home/dev/.android
+    environment:
+      ATAK_SDK: /opt/atak-sdk
+      ADB_SERVER_SOCKET: tcp:host.docker.internal:5037
+    stdin_open: true
+    tty: true
+
+volumes:
+  gradle-cache:
