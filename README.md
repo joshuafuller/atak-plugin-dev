@@ -1,5 +1,7 @@
 # ATAK plugin dev container
 
+[![build](https://github.com/joshuafuller/atak-plugin-dev/actions/workflows/build.yml/badge.svg)](https://github.com/joshuafuller/atak-plugin-dev/actions/workflows/build.yml)
+
 A ready-made build environment for [ATAK](https://tak.gov) plugins. It builds
 your plugin, installs it to an emulator or device, gets it loaded into ATAK,
 and runs instrumented tests inside ATAK's own process — without you installing
