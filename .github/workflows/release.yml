@@ -33,7 +33,12 @@ jobs:
       - uses: googleapis/release-please-action@v4
         id: release
         with:
-          release-type: simple
+          # Deliberately no release-type input: passing one puts the action in
+          # simple-config mode, where release-please-config.json and the
+          # manifest are ignored — which silently proposed 1.0.0 instead of
+          # honouring the 0.1.0 in the manifest.
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
 
   base-image:
     needs: please
