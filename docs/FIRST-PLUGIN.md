@@ -60,7 +60,34 @@ empty should stop and ask for this zip rather than looking for a copy
 elsewhere: a build from anywhere but tak.gov is both a licence problem and
 probably the wrong version.
 
-## 2. Create and start an emulator
+## 2. Clone this repo and set your paths
+
+```bash
+# HOST
+git clone https://github.com/joshuafuller/atak-plugin-dev
+cd atak-plugin-dev
+cp .env.example .env
+```
+
+Edit `.env` — Docker Compose reads it:
+
+```ini
+# .env — file contents, not commands
+ATAK_SDK_DIR=/absolute/path/to/ATAK-CIV-5.8.0.1-SDK   # from step 1
+PLUGINS_DIR=/absolute/path/to/where/your/plugins/live # a folder, not one project
+```
+
+`.env` is read by Compose, **not** by your shell. The steps below use these
+paths directly, so export them too, in the terminal you are working in:
+
+```bash
+# HOST
+export ATAK_SDK_DIR=/absolute/path/to/ATAK-CIV-5.8.0.1-SDK
+export PLUGINS_DIR=/absolute/path/to/where/your/plugins/live
+mkdir -p "$PLUGINS_DIR"
+```
+
+## 3. Create and start an emulator
 
 Use a **`google_apis`** image. Do not use `aosp_atd`: it renders a black screen
 while still reporting a full view tree, so UI automation appears to work and
@@ -80,32 +107,17 @@ emulator -avd atak_dev -port 5554 -gpu swiftshader_indirect &
 
 Then start the adb server so the container can reach it. It must be started
 explicitly with `-a`; a server auto-spawned by a client will not listen where
-the container can see it:
+the container can see it. Run it from the repo you cloned in step 2:
 
 ```bash
-# HOST — leave this running in its own terminal
+# HOST — from the atak-plugin-dev directory, leave running in its own terminal
 ./bin/host-adb-server
 ```
 
-## 3. Bring up the container
+## 4. Bring up the container
 
 ```bash
-# HOST
-git clone https://github.com/joshuafuller/atak-plugin-dev
-cd atak-plugin-dev
-cp .env.example .env
-```
-
-Edit `.env`:
-
-```ini
-# .env — file contents, not commands
-ATAK_SDK_DIR=/absolute/path/to/ATAK-CIV-5.8.0.1-SDK   # from step 1
-PLUGINS_DIR=/absolute/path/to/where/your/plugins/live # a folder, not one project
-```
-
-```bash
-# HOST
+# HOST — from the atak-plugin-dev directory
 docker compose up -d --build          # first run pulls the base and the Android SDK
 docker compose exec atak-dev doctor
 ```
@@ -115,7 +127,7 @@ the emulator image and — the check that saves the most time — whether the AT
 on your device will actually accept plugins you build. **Do not continue past a
 failure**; each one prints what to do.
 
-## 4. Install the developer ATAK
+## 5. Install the developer ATAK
 
 This is the signing gate, and skipping it costs an afternoon.
 
@@ -132,7 +144,7 @@ Launch ATAK, accept its prompts, and confirm a red **DEVELOPER BUILD**
 watermark on the map. That watermark is how you know you are on the right one.
 Re-run `doctor`; it compares the installed certificate against the SDK's.
 
-## 5. Scaffold your plugin
+## 6. Scaffold your plugin
 
 ```bash
 # HOST — $PLUGINS_DIR is the folder from your .env
@@ -154,7 +166,7 @@ takdev.plugin=/opt/atak-sdk/atak-gradle-takdev.jar
 worse — see [WORKFLOW.md](WORKFLOW.md) for the five places that must change
 together, and the one activity you must not remove.
 
-## 6. Build, install, load
+## 7. Build, install, load
 
 ```bash
 # HOST
@@ -171,7 +183,7 @@ tap your plugin's row → Load → OK**.
 The row goes `Not loaded` → `Loaded`, and your plugin appears in the Tools
 drawer.
 
-## 7. Confirm it, and check yourself
+## 8. Confirm it, and check yourself
 
 ```bash
 # HOST
@@ -179,7 +191,7 @@ docker compose exec atak-dev bash -lc 'adb logcat -d | rg "AtakPluginRegistry" |
 ```
 
 You want `SDK skipping signature check` and `Loaded <your class>`. If you see
-`signature mismatch`, go back to step 4.
+`signature mismatch`, go back to step 5.
 
 ```bash
 # HOST — before your first commit
@@ -203,12 +215,12 @@ adb logcat | rg "AtakPluginRegistry|PluginValidator"
 
 | You see | It means |
 | --- | --- |
-| "Incompatible" in the plugin manager | Release ATAK installed. Step 4 |
+| "Incompatible" in the plugin manager | Release ATAK installed. Step 5 |
 | `signature mismatch` | Same |
-| Plugin not listed at all | Not staged, or not synced. Step 6 |
-| `adb devices` empty in the container | Host adb server not started with `-a`. Step 2 |
+| Plugin not listed at all | Not staged, or not synced. Step 7 |
+| `adb devices` empty in the container | Host adb server not started with `-a`. Step 3 |
 | Tests hang for ten minutes | Never set `ADB_SERVER_SOCKET`; use `instrument` |
-| UI automation "works" but nothing changes | `aosp_atd` image. Step 2 |
+| UI automation "works" but nothing changes | `aosp_atd` image. Step 3 |
 
 [TROUBLESHOOTING.md](TROUBLESHOOTING.md) has the full table.
 
