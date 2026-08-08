@@ -130,6 +130,23 @@ them when a copy is in that folder and you sync:
 
 Status goes `Not loaded` → `Loaded`, and the plugin appears in the Tools drawer.
 
+The plugin manager after a sync — yours is listed alongside the products from
+TAK's own repositories, and the sync control is the blue arrows, top right:
+
+![Plugin manager listing a sideloaded plugin](docs/images/plugin-manager.png)
+
+Tapping the row shows its state. `is loaded and current` is what you want; if
+it says **Incompatible**, go back to
+[the signing gate](#read-this-first-the-signing-gate):
+
+![Plugin details showing loaded and current](docs/images/plugin-details.png)
+
+Once loaded it appears in the Tools drawer and opens its own pane. Note the
+red `DEVELOPER BUILD` watermark — that is how you know you are on the SDK's
+ATAK and not the release one:
+
+![The plugin's pane open in ATAK](docs/images/plugin-pane.png)
+
 ### Rename the template before you write any code
 
 The template builds as `com.atakmap.android.plugintemplate.plugin` and displays
