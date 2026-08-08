@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl wget unzip zip git ca-certificates file sudo \
         vim nano less tree jq python3 python3-pip \
         procps iputils-ping net-tools openssh-client \
-        ripgrep fd-find sqlite3 xxd patch \
+        ripgrep fd-find sqlite3 xxd patch gnupg \
     && ln -s "$(command -v fdfind)" /usr/local/bin/fd \
     && curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
         -o /usr/share/keyrings/githubcli-archive-keyring.gpg \
