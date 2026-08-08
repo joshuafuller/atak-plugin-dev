@@ -167,6 +167,18 @@ the sideload folder, or Sync Packages will show a phantom second product.
 
 ---
 
+## What the sample plugin does so far
+
+`workspace/MapRoom` reads the [ATAK-Maps](https://github.com/joshuafuller/ATAK-Maps)
+catalogue bundled in its own assets and writes the sources into
+`/atak/imagery`. After that ATAK lists all 33 of them:
+
+![ATAK's Mobile Imagery list showing the installed catalogue](docs/images/installed-sources.png)
+
+And they draw — this is Bing Satellite, selected from that list:
+
+![Bing satellite imagery rendering in ATAK](docs/images/rendering.png)
+
 ## Testing
 
 `./gradlew testCivDebugUnitTest` runs local JVM tests — use these for anything
