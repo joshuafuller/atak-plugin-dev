@@ -113,6 +113,7 @@ git clone https://github.com/joshuafuller/atak-plugin-skill \
 | [docs/WORKFLOW.md](docs/WORKFLOW.md) | Scaffolding a plugin, renaming the template, the build-load loop, testing and debugging |
 | [docs/SIGNING.md](docs/SIGNING.md) | The signing gate, and what the developer build changes |
 | [docs/SHIPPING.md](docs/SHIPPING.md) | Getting a signed APK through TAK's Third Party Pipeline |
+| [docs/WHAT-SHIPS.md](docs/WHAT-SHIPS.md) | What ships, what cannot, and how to close each gap — including air-gapped |
 | [docs/SCANNING.md](docs/SCANNING.md) | What `scan` checks, and what to install when a project needs more |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Symptom-to-cause table |
 | [AGENTS.md](AGENTS.md) | Running the whole loop unattended |

@@ -32,6 +32,11 @@ One thing genuinely requires a person: **downloading the ATAK SDK.** It sits
 behind a click-through licence at <https://tak.gov> and cannot be fetched
 non-interactively. Everything after that point is yours.
 
+`docs/WHAT-SHIPS.md` lists every component, whether it ships, and how each gap
+closes — read it once. The short version: the repo and the base image ship, the
+Android SDK installs itself on this machine during the build, and the ATAK SDK
+is the only thing a human must fetch.
+
 If `$ATAK_SDK` is not populated, stop and ask for the SDK zip. Do not try to
 find a copy elsewhere — it is licensed material, and a copy from anywhere but
 tak.gov is both a licence problem and, quite likely, the wrong version.
