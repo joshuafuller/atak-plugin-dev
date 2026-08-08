@@ -93,7 +93,15 @@ automated: it is behind a click-through licence.
 There is also a [Claude skill](https://github.com/joshuafuller/atak-plugin-skill)
 carrying the same measured facts, for agent-assisted work.
 
-## Licence
+## Licence and attribution
 
-MIT — see [LICENSE](LICENSE). No ATAK SDK material is included or
-redistributed; [NOTICE.md](NOTICE.md) explains the boundary.
+MIT — see [LICENSE](LICENSE).
+
+ATAK and TAK are products of the TAK Product Center and the U.S. Government.
+This is an independent, unofficial development tool and is **not affiliated
+with or endorsed by** them.
+
+No ATAK SDK material is included or redistributed. [NOTICE.md](NOTICE.md)
+covers that boundary, the third-party components the image installs and their
+licences, the fact that building the image accepts Google's Android SDK terms
+on your behalf, and the licensing of contributions.

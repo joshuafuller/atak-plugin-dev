@@ -68,9 +68,13 @@ jobs:
 
       - name: No ATAK SDK material committed
         run: |
-          if git ls-files | grep -qiE '\.(aar|apk|jar|keystore|so)$|android_keystore|atak-gradle-takdev'; then
+          # A backstop against the common mistake, not a proof. It cannot
+          # recognise an SDK text file that has been renamed; NOTICE.md says so
+          # rather than claiming more than this does.
+          banned='\.(aar|apk|aab|jar|zip|keystore|so)$|android_keystore|atak-gradle-takdev|atakplugintests|ATAKPluginTests|plugintemplate|^main\.jar$'
+          if git ls-files | grep -qiE "$banned"; then
             echo "::error::SDK material or a binary artifact is committed"
-            git ls-files | grep -iE '\.(aar|apk|jar|keystore|so)$|android_keystore|atak-gradle-takdev'
+            git ls-files | grep -iE "$banned"
             exit 1
           fi
           echo "clean"
