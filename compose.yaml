@@ -35,7 +35,14 @@ services:
 
     environment:
       ATAK_SDK: /opt/atak-sdk
-      ADB_SERVER_SOCKET: ${ADB_SERVER_SOCKET:-tcp:host.docker.internal:5037}
+      # Where the host's adb server actually is. The bridge below forwards
+      # 127.0.0.1:5037 to it; ADB_SERVER_SOCKET is deliberately NOT set,
+      # because Gradle's device monitor ignores it, runs `adb start-server`,
+      # and then hangs when that cannot bind the address.
+      ADB_BRIDGE_TARGET: ${ADB_BRIDGE_TARGET:-host.docker.internal:5037}
+
+    # Forward the adb port for the container's lifetime, then idle.
+    command: ["bash", "-lc", "/work/bin/adb-bridge & exec sleep infinity"]
 
     stdin_open: true
     tty: true

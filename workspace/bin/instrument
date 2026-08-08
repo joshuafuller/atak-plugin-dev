@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Run a plugin's instrumented tests, without Gradle's UTP device provider.
+#
+#   /work/bin/instrument MapRoom [TestClass#method]
+#
+# Why not ./gradlew connectedCivDebugAndroidTest: the Unified Test Platform
+# starts its own JVM whose ddmlib fails with "Failed to initialize
+# AndroidDebugBridge" against the forwarded adb socket this container uses.
+# The Gradle task's real work is assembling, re-signing (modApk) and installing
+# the APKs; this does that through Gradle and then drives the instrumentation
+# with adb, which the bridge handles fine.
+set -euo pipefail
+
+PROJECT="${1:-}"
+FILTER="${2:-}"
+VARIANT="${VARIANT:-CivDebug}"
+
+if [[ -z "$PROJECT" ]]; then
+    echo "usage: instrument <project-dir> [Class#method]" >&2
+    exit 2
+fi
+
+cd "/work/$PROJECT"
+FLAVOUR=$(printf '%s' "$VARIANT" | sed -E 's/^([A-Z][a-z]*).*/\1/' | tr '[:upper:]' '[:lower:]')
+BUILD_TYPE=$(printf '%s' "$VARIANT" | sed -E 's/^[A-Z][a-z]*//' | tr '[:upper:]' '[:lower:]')
+
+echo "==> assemble and install"
+# The _modApk task is the important one, and assembleAndroidTest does NOT run
+# it — only connectedAndroidTest depends on it. It rewrites the instrumentation
+# manifest's targetPackage to com.atakmap.app.civ and re-signs, which is what
+# makes the tests run inside ATAK's process with ATAK's classes on the
+# classpath. Without it the tests start and immediately die on
+# NoClassDefFoundError for ATAK's own classes.
+env -u ADB_SERVER_SOCKET ./gradlew "assemble$VARIANT" "package${VARIANT}AndroidTest_modApk"
+
+APP_APK=$(find "app/build/outputs/apk/$FLAVOUR/$BUILD_TYPE" -maxdepth 1 -name '*.apk' | head -1)
+TEST_APK=$(find "app/build/outputs/apk/androidTest/$FLAVOUR/$BUILD_TYPE" -maxdepth 1 -name '*.apk' | head -1)
+adb install -r "$APP_APK" >/dev/null
+adb install -r "$TEST_APK" >/dev/null
+
+BT="$ANDROID_HOME/build-tools/36.0.0"
+TEST_PKG=$("$BT/aapt2" dump badging "$TEST_APK" | sed -n "s/^package: name='\([^']*\)'.*/\1/p")
+RUNNER=com.atakmap.android.test.helpers.NoFinishAndroidJUnitRunner
+
+echo "==> instrument $TEST_PKG"
+ARGS=(-w -e listener com.atakmap.android.test.helpers.ATAKStarter)
+[[ -n "$FILTER" ]] && ARGS+=(-e class "$FILTER")
+
+adb shell am instrument "${ARGS[@]}" "$TEST_PKG/$RUNNER" 2>&1 | tee /tmp/instrument.out
+
+# `am instrument` exits 0 even when tests fail, so decide from the output.
+if grep -qE "^(FAILURES!!!|INSTRUMENTATION_CODE: 0$)" /tmp/instrument.out \
+   || grep -q "Process crashed" /tmp/instrument.out; then
+    echo "==> FAILED"
+    exit 1
+fi
+grep -qE "^OK \(" /tmp/instrument.out || { echo "==> no tests ran"; exit 1; }
+echo "==> PASSED"

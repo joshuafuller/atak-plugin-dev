@@ -1,0 +1,1247 @@
+==> assemble and install
+
+> Configure project :app
+Configuring Offline TakDev plugin build
+found local espresso testing library
+using a local version of the atakplugintests gradle plugin
+skipping user manual generation
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+versionName[git]: 
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+error occured, using revision of 1
+fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+versionName[git]: 
+WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+WARNING: Using flatDir2 should be avoided because it doesn't support any meta-data formats.
+
+> Task :app:preBuild UP-TO-DATE
+
+> Task :app:preCivDebugBuild
+augment the proguard file with the atak core rules
+> Task :app:mergeCivDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateCivDebugBuildConfig UP-TO-DATE
+> Task :app:javaPreCompileCivDebug UP-TO-DATE
+> Task :app:checkCivDebugAarMetadata UP-TO-DATE
+> Task :app:processCivDebugNavigationResources UP-TO-DATE
+> Task :app:compileCivDebugNavigationResources UP-TO-DATE
+> Task :app:generateCivDebugResValues UP-TO-DATE
+> Task :app:mapCivDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateCivDebugResources UP-TO-DATE
+> Task :app:mergeCivDebugResources UP-TO-DATE
+> Task :app:packageCivDebugResources UP-TO-DATE
+> Task :app:parseCivDebugLocalResources UP-TO-DATE
+> Task :app:createCivDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksCivDebug UP-TO-DATE
+> Task :app:processCivDebugMainManifest UP-TO-DATE
+> Task :app:processCivDebugManifest UP-TO-DATE
+> Task :app:processCivDebugManifestForPackage UP-TO-DATE
+> Task :app:processCivDebugResources UP-TO-DATE
+> Task :app:compileCivDebugJavaWithJavac UP-TO-DATE
+> Task :app:mergeCivDebugShaders UP-TO-DATE
+> Task :app:compileCivDebugShaders NO-SOURCE
+> Task :app:generateCivDebugAssets UP-TO-DATE
+> Task :app:mergeCivDebugAssets UP-TO-DATE
+> Task :app:compressCivDebugAssets UP-TO-DATE
+> Task :app:desugarCivDebugFileDependencies UP-TO-DATE
+> Task :app:dexBuilderCivDebug
+> Task :app:mergeCivDebugGlobalSynthetics UP-TO-DATE
+> Task :app:processCivDebugJavaRes NO-SOURCE
+> Task :app:mergeCivDebugJavaResource UP-TO-DATE
+> Task :app:checkCivDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexCivDebug UP-TO-DATE
+> Task :app:mergeLibDexCivDebug UP-TO-DATE
+> Task :app:mergeCivDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeCivDebugNativeLibs NO-SOURCE
+> Task :app:stripCivDebugDebugSymbols NO-SOURCE
+> Task :app:validateSigningCivDebug UP-TO-DATE
+> Task :app:writeCivDebugAppMetadata UP-TO-DATE
+> Task :app:writeCivDebugSigningConfigVersions UP-TO-DATE
+> Task :app:bundleCivDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preCivDebugAndroidTestBuild SKIPPED
+> Task :app:mergeProjectDexCivDebug
+> Task :app:processCivDebugAndroidTestManifest
+> Task :app:generateCivDebugAndroidTestBuildConfig UP-TO-DATE
+> Task :app:javaPreCompileCivDebugAndroidTest UP-TO-DATE
+> Task :app:checkCivDebugAndroidTestAarMetadata UP-TO-DATE
+> Task :app:processCivDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:compileCivDebugAndroidTestNavigationResources UP-TO-DATE
+> Task :app:generateCivDebugAndroidTestResValues UP-TO-DATE
+> Task :app:mapCivDebugAndroidTestSourceSetPaths UP-TO-DATE
+> Task :app:generateCivDebugAndroidTestResources UP-TO-DATE
+> Task :app:mergeCivDebugAndroidTestResources UP-TO-DATE
+> Task :app:processCivDebugAndroidTestResources UP-TO-DATE
+> Task :app:compileCivDebugAndroidTestJavaWithJavac UP-TO-DATE
+> Task :app:mergeCivDebugAndroidTestShaders UP-TO-DATE
+> Task :app:compileCivDebugAndroidTestShaders NO-SOURCE
+> Task :app:generateCivDebugAndroidTestAssets UP-TO-DATE
+> Task :app:mergeCivDebugAndroidTestAssets UP-TO-DATE
+> Task :app:compressCivDebugAndroidTestAssets UP-TO-DATE
+> Task :app:desugarCivDebugAndroidTestFileDependencies UP-TO-DATE
+> Task :app:dexBuilderCivDebugAndroidTest UP-TO-DATE
+> Task :app:mergeCivDebugAndroidTestGlobalSynthetics UP-TO-DATE
+> Task :app:processCivDebugAndroidTestJavaRes NO-SOURCE
+> Task :app:mergeCivDebugAndroidTestJavaResource UP-TO-DATE
+> Task :app:checkCivDebugAndroidTestDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexCivDebugAndroidTest UP-TO-DATE
+> Task :app:mergeLibDexCivDebugAndroidTest UP-TO-DATE
+> Task :app:mergeProjectDexCivDebugAndroidTest UP-TO-DATE
+> Task :app:processCivDebugAndroidTestManifest_switchTarget
+> Task :app:mergeCivDebugAndroidTestJniLibFolders UP-TO-DATE
+> Task :app:mergeCivDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripCivDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :app:validateSigningCivDebugAndroidTest UP-TO-DATE
+> Task :app:writeCivDebugAndroidTestSigningConfigVersions UP-TO-DATE
+> Task :app:packageCivDebug
+> Task :app:createCivDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleCivDebug
+> Task :app:packageCivDebugAndroidTest
+> Task :app:createCivDebugAndroidTestApkListingFileRedirect UP-TO-DATE
+
+> Task :app:packageCivDebugAndroidTest_modApk
+/work/MapRoom/app/build/outputs/apk/androidTest/civ/debug/ATAK-Plugin-MapRoom-0.1--5.8.0-civ-debug-androidTest.apkcreating apk with modded AndroidManifest.xml from: /work/MapRoom/app/build/outputs/apk/androidTest/civ/debug/ATAK-Plugin-MapRoom-0.1--5.8.0-civ-debug-androidTest.apk to: /work/MapRoom/app/build/tmp/packageCivDebugAndroidTest/modAPK/ATAK-Plugin-MapRoom-0.1--5.8.0-civ-debug-androidTest.apk
+copying resources in bulk from built apk to modded apk
+ 'DebugProbesKt.bin'...
+ 'LICENSE-junit.txt'...
+ 'classes.dex'...
+ 'classes2.dex'...
+ 'classes3.dex'...
+ 'classes4.dex'...
+ 'classes5.dex'...
+ 'junit/runner/logo.gif'...
+ 'junit/runner/smalllogo.gif'...
+ 'kotlin/annotation/annotation.kotlin_builtins'...
+ 'kotlin/collections/collections.kotlin_builtins'...
+ 'kotlin/coroutines/coroutines.kotlin_builtins'...
+ 'kotlin/internal/internal.kotlin_builtins'...
+ 'kotlin/kotlin.kotlin_builtins'...
+ 'kotlin/ranges/ranges.kotlin_builtins'...
+ 'kotlin/reflect/reflect.kotlin_builtins'...
+ 'org/mockito/internal/creation/bytebuddy/inject-MockMethodDispatcher.raw'...
+ 'res/anim-v21/fragment_fast_out_extra_slow_in.xml'...
+ 'res/anim/abc_fade_in.xml'...
+ 'res/anim/abc_fade_out.xml'...
+ 'res/anim/abc_grow_fade_in_from_bottom.xml'...
+ 'res/anim/abc_popup_enter.xml'...
+ 'res/anim/abc_popup_exit.xml'...
+ 'res/anim/abc_shrink_fade_out_from_bottom.xml'...
+ 'res/anim/abc_slide_in_bottom.xml'...
+ 'res/anim/abc_slide_in_top.xml'...
+ 'res/anim/abc_slide_out_bottom.xml'...
+ 'res/anim/abc_slide_out_top.xml'...
+ 'res/anim/abc_tooltip_enter.xml'...
+ 'res/anim/abc_tooltip_exit.xml'...
+ 'res/anim/btn_checkbox_to_checked_box_inner_merged_animation.xml'...
+ 'res/anim/btn_checkbox_to_checked_box_outer_merged_animation.xml'...
+ 'res/anim/btn_checkbox_to_checked_icon_null_animation.xml'...
+ 'res/anim/btn_checkbox_to_unchecked_box_inner_merged_animation.xml'...
+ 'res/anim/btn_checkbox_to_unchecked_check_path_merged_animation.xml'...
+ 'res/anim/btn_checkbox_to_unchecked_icon_null_animation.xml'...
+ 'res/anim/btn_radio_to_off_mtrl_dot_group_animation.xml'...
+ 'res/anim/btn_radio_to_off_mtrl_ring_outer_animation.xml'...
+ 'res/anim/btn_radio_to_off_mtrl_ring_outer_path_animation.xml'...
+ 'res/anim/btn_radio_to_on_mtrl_dot_group_animation.xml'...
+ 'res/anim/btn_radio_to_on_mtrl_ring_outer_animation.xml'...
+ 'res/anim/btn_radio_to_on_mtrl_ring_outer_path_animation.xml'...
+ 'res/animator/fragment_close_enter.xml'...
+ 'res/animator/fragment_close_exit.xml'...
+ 'res/animator/fragment_fade_enter.xml'...
+ 'res/animator/fragment_fade_exit.xml'...
+ 'res/animator/fragment_open_enter.xml'...
+ 'res/animator/fragment_open_exit.xml'...
+ 'res/color-v21/abc_btn_colored_borderless_text_material.xml'...
+ 'res/color-v23/abc_btn_colored_borderless_text_material.xml'...
+ 'res/color-v23/abc_btn_colored_text_material.xml'...
+ 'res/color-v23/abc_color_highlight_material.xml'...
+ 'res/color-v23/abc_tint_btn_checkable.xml'...
+ 'res/color-v23/abc_tint_default.xml'...
+ 'res/color-v23/abc_tint_edittext.xml'...
+ 'res/color-v23/abc_tint_seek_thumb.xml'...
+ 'res/color-v23/abc_tint_spinner.xml'...
+ 'res/color-v23/abc_tint_switch_track.xml'...
+ 'res/color/abc_background_cache_hint_selector_material_dark.xml'...
+ 'res/color/abc_background_cache_hint_selector_material_light.xml'...
+ 'res/color/abc_btn_colored_text_material.xml'...
+ 'res/color/abc_hint_foreground_material_dark.xml'...
+ 'res/color/abc_hint_foreground_material_light.xml'...
+ 'res/color/abc_primary_text_disable_only_material_dark.xml'...
+ 'res/color/abc_primary_text_disable_only_material_light.xml'...
+ 'res/color/abc_primary_text_material_dark.xml'...
+ 'res/color/abc_primary_text_material_light.xml'...
+ 'res/color/abc_search_url_text.xml'...
+ 'res/color/abc_secondary_text_material_dark.xml'...
+ 'res/color/abc_secondary_text_material_light.xml'...
+ 'res/color/abc_tint_btn_checkable.xml'...
+ 'res/color/abc_tint_default.xml'...
+ 'res/color/abc_tint_edittext.xml'...
+ 'res/color/abc_tint_seek_thumb.xml'...
+ 'res/color/abc_tint_spinner.xml'...
+ 'res/color/abc_tint_switch_track.xml'...
+ 'res/color/switch_thumb_material_dark.xml'...
+ 'res/color/switch_thumb_material_light.xml'...
+ 'res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png'...
+ 'res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png'...
+ 'res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png'...
+ 'res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png'...
+ 'res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png'...
+ 'res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png'...
+ 'res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png'...
+ 'res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_list_focused_holo.9.png'...
+ 'res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png'...
+ 'res/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png'...
+ 'res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png'...
+ 'res/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png'...
+ 'res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png'...
+ 'res/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png'...
+ 'res/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png'...
+ 'res/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png'...
+ 'res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png'...
+ 'res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png'...
+ 'res/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_text_select_handle_left_mtrl.png'...
+ 'res/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl.png'...
+ 'res/drawable-hdpi-v4/abc_text_select_handle_right_mtrl.png'...
+ 'res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png'...
+ 'res/drawable-hdpi-v4/notification_bg_low_normal.9.png'...
+ 'res/drawable-hdpi-v4/notification_bg_low_pressed.9.png'...
+ 'res/drawable-hdpi-v4/notification_bg_normal.9.png'...
+ 'res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png'...
+ 'res/drawable-hdpi-v4/notification_oversize_large_icon_bg.png'...
+ 'res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png'...
+ 'res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-ldrtl-xhdpi-v17/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-ldrtl-xxxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_000.png'...
+ 'res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_015.png'...
+ 'res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_000.png'...
+ 'res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_015.png'...
+ 'res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png'...
+ 'res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png'...
+ 'res/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png'...
+ 'res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_list_focused_holo.9.png'...
+ 'res/drawable-mdpi-v4/abc_list_longpressed_holo.9.png'...
+ 'res/drawable-mdpi-v4/abc_list_pressed_holo_dark.9.png'...
+ 'res/drawable-mdpi-v4/abc_list_pressed_holo_light.9.png'...
+ 'res/drawable-mdpi-v4/abc_list_selector_disabled_holo_dark.9.png'...
+ 'res/drawable-mdpi-v4/abc_list_selector_disabled_holo_light.9.png'...
+ 'res/drawable-mdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png'...
+ 'res/drawable-mdpi-v4/abc_popup_background_mtrl_mult.9.png'...
+ 'res/drawable-mdpi-v4/abc_scrubber_control_off_mtrl_alpha.png'...
+ 'res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png'...
+ 'res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png'...
+ 'res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_scrubber_track_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_switch_track_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_tab_indicator_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_text_select_handle_left_mtrl.png'...
+ 'res/drawable-mdpi-v4/abc_text_select_handle_middle_mtrl.png'...
+ 'res/drawable-mdpi-v4/abc_text_select_handle_right_mtrl.png'...
+ 'res/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_textfield_default_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png'...
+ 'res/drawable-mdpi-v4/notification_bg_low_normal.9.png'...
+ 'res/drawable-mdpi-v4/notification_bg_low_pressed.9.png'...
+ 'res/drawable-mdpi-v4/notification_bg_normal.9.png'...
+ 'res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png'...
+ 'res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png'...
+ 'res/drawable-v21/abc_action_bar_item_background_material.xml'...
+ 'res/drawable-v21/abc_btn_colored_material.xml'...
+ 'res/drawable-v21/abc_dialog_material_background.xml'...
+ 'res/drawable-v21/abc_edit_text_material.xml'...
+ 'res/drawable-v21/abc_list_divider_material.xml'...
+ 'res/drawable-v21/notification_action_background.xml'...
+ 'res/drawable-v23/abc_control_background_material.xml'...
+ 'res/drawable-watch-v20/abc_dialog_material_background.xml'...
+ 'res/drawable-xhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png'...
+ 'res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_015.png'...
+ 'res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_000.png'...
+ 'res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_015.png'...
+ 'res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png'...
+ 'res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png'...
+ 'res/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png'...
+ 'res/drawable-xhdpi-v4/abc_list_divider_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_list_focused_holo.9.png'...
+ 'res/drawable-xhdpi-v4/abc_list_longpressed_holo.9.png'...
+ 'res/drawable-xhdpi-v4/abc_list_pressed_holo_dark.9.png'...
+ 'res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png'...
+ 'res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_dark.9.png'...
+ 'res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_light.9.png'...
+ 'res/drawable-xhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png'...
+ 'res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png'...
+ 'res/drawable-xhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png'...
+ 'res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png'...
+ 'res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png'...
+ 'res/drawable-xhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_switch_track_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl.png'...
+ 'res/drawable-xhdpi-v4/abc_text_select_handle_middle_mtrl.png'...
+ 'res/drawable-xhdpi-v4/abc_text_select_handle_right_mtrl.png'...
+ 'res/drawable-xhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_textfield_default_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png'...
+ 'res/drawable-xhdpi-v4/notification_bg_low_normal.9.png'...
+ 'res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png'...
+ 'res/drawable-xhdpi-v4/notification_bg_normal.9.png'...
+ 'res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png'...
+ 'res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png'...
+ 'res/drawable-xxhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png'...
+ 'res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_015.png'...
+ 'res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png'...
+ 'res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png'...
+ 'res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png'...
+ 'res/drawable-xxhdpi-v4/abc_list_divider_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_list_focused_holo.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_list_longpressed_holo.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_dark.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_light.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_popup_background_mtrl_mult.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png'...
+ 'res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png'...
+ 'res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png'...
+ 'res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_text_select_handle_left_mtrl.png'...
+ 'res/drawable-xxhdpi-v4/abc_text_select_handle_middle_mtrl.png'...
+ 'res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl.png'...
+ 'res/drawable-xxhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png'...
+ 'res/drawable-xxhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png'...
+ 'res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png'...
+ 'res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_015.png'...
+ 'res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png'...
+ 'res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png'...
+ 'res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png'...
+ 'res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png'...
+ 'res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png'...
+ 'res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png'...
+ 'res/drawable-xxxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png'...
+ 'res/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png'...
+ 'res/drawable-xxxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png'...
+ 'res/drawable-xxxhdpi-v4/abc_text_select_handle_left_mtrl.png'...
+ 'res/drawable-xxxhdpi-v4/abc_text_select_handle_right_mtrl.png'...
+ 'res/drawable/abc_btn_borderless_material.xml'...
+ 'res/drawable/abc_btn_check_material.xml'...
+ 'res/drawable/abc_btn_check_material_anim.xml'...
+ 'res/drawable/abc_btn_default_mtrl_shape.xml'...
+ 'res/drawable/abc_btn_radio_material.xml'...
+ 'res/drawable/abc_btn_radio_material_anim.xml'...
+ 'res/drawable/abc_cab_background_internal_bg.xml'...
+ 'res/drawable/abc_cab_background_top_material.xml'...
+ 'res/drawable/abc_ic_ab_back_material.xml'...
+ 'res/drawable/abc_ic_arrow_drop_right_black_24dp.xml'...
+ 'res/drawable/abc_ic_clear_material.xml'...
+ 'res/drawable/abc_ic_go_search_api_material.xml'...
+ 'res/drawable/abc_ic_menu_copy_mtrl_am_alpha.xml'...
+ 'res/drawable/abc_ic_menu_cut_mtrl_alpha.xml'...
+ 'res/drawable/abc_ic_menu_overflow_material.xml'...
+ 'res/drawable/abc_ic_menu_paste_mtrl_am_alpha.xml'...
+ 'res/drawable/abc_ic_menu_selectall_mtrl_alpha.xml'...
+ 'res/drawable/abc_ic_menu_share_mtrl_alpha.xml'...
+ 'res/drawable/abc_ic_search_api_material.xml'...
+ 'res/drawable/abc_ic_voice_search_api_material.xml'...
+ 'res/drawable/abc_item_background_holo_dark.xml'...
+ 'res/drawable/abc_item_background_holo_light.xml'...
+ 'res/drawable/abc_list_selector_background_transition_holo_dark.xml'...
+ 'res/drawable/abc_list_selector_background_transition_holo_light.xml'...
+ 'res/drawable/abc_list_selector_holo_dark.xml'...
+ 'res/drawable/abc_list_selector_holo_light.xml'...
+ 'res/drawable/abc_ratingbar_indicator_material.xml'...
+ 'res/drawable/abc_ratingbar_material.xml'...
+ 'res/drawable/abc_ratingbar_small_material.xml'...
+ 'res/drawable/abc_seekbar_thumb_material.xml'...
+ 'res/drawable/abc_seekbar_tick_mark_material.xml'...
+ 'res/drawable/abc_seekbar_track_material.xml'...
+ 'res/drawable/abc_spinner_textfield_background_material.xml'...
+ 'res/drawable/abc_star_black_48dp.xml'...
+ 'res/drawable/abc_star_half_black_48dp.xml'...
+ 'res/drawable/abc_switch_thumb_material.xml'...
+ 'res/drawable/abc_tab_indicator_material.xml'...
+ 'res/drawable/abc_text_cursor_material.xml'...
+ 'res/drawable/abc_textfield_search_material.xml'...
+ 'res/drawable/abc_vector_test.xml'...
+ 'res/drawable/btn_checkbox_checked_mtrl.xml'...
+ 'res/drawable/btn_checkbox_checked_to_unchecked_mtrl_animation.xml'...
+ 'res/drawable/btn_checkbox_unchecked_mtrl.xml'...
+ 'res/drawable/btn_checkbox_unchecked_to_checked_mtrl_animation.xml'...
+ 'res/drawable/btn_radio_off_mtrl.xml'...
+ 'res/drawable/btn_radio_off_to_on_mtrl_animation.xml'...
+ 'res/drawable/btn_radio_on_mtrl.xml'...
+ 'res/drawable/btn_radio_on_to_off_mtrl_animation.xml'...
+ 'res/drawable/ic_call_answer.xml'...
+ 'res/drawable/ic_call_answer_low.xml'...
+ 'res/drawable/ic_call_answer_video.xml'...
+ 'res/drawable/ic_call_answer_video_low.xml'...
+ 'res/drawable/ic_call_decline.xml'...
+ 'res/drawable/ic_call_decline_low.xml'...
+ 'res/drawable/notification_bg.xml'...
+ 'res/drawable/notification_bg_low.xml'...
+ 'res/drawable/notification_icon_background.xml'...
+ 'res/drawable/notification_tile_bg.xml'...
+ 'res/drawable/test_level_drawable.xml'...
+ 'res/drawable/tooltip_frame_dark.xml'...
+ 'res/drawable/tooltip_frame_light.xml'...
+ 'res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_0.xml'...
+ 'res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_1.xml'...
+ 'res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml'...
+ 'res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml'...
+ 'res/interpolator/btn_radio_to_off_mtrl_animation_interpolator_0.xml'...
+ 'res/interpolator/btn_radio_to_on_mtrl_animation_interpolator_0.xml'...
+ 'res/interpolator/fast_out_slow_in.xml'...
+ 'res/layout-v21/notification_action.xml'...
+ 'res/layout-v21/notification_action_tombstone.xml'...
+ 'res/layout-v21/notification_template_custom_big.xml'...
+ 'res/layout-v21/notification_template_icon_group.xml'...
+ 'res/layout-v22/abc_alert_dialog_button_bar_material.xml'...
+ 'res/layout-v26/abc_screen_toolbar.xml'...
+ 'res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml'...
+ 'res/layout-watch-v20/abc_alert_dialog_title_material.xml'...
+ 'res/layout/abc_action_bar_title_item.xml'...
+ 'res/layout/abc_action_bar_up_container.xml'...
+ 'res/layout/abc_action_menu_item_layout.xml'...
+ 'res/layout/abc_action_menu_layout.xml'...
+ 'res/layout/abc_action_mode_bar.xml'...
+ 'res/layout/abc_action_mode_close_item_material.xml'...
+ 'res/layout/abc_activity_chooser_view.xml'...
+ 'res/layout/abc_activity_chooser_view_list_item.xml'...
+ 'res/layout/abc_alert_dialog_button_bar_material.xml'...
+ 'res/layout/abc_alert_dialog_material.xml'...
+ 'res/layout/abc_alert_dialog_title_material.xml'...
+ 'res/layout/abc_cascading_menu_item_layout.xml'...
+ 'res/layout/abc_dialog_title_material.xml'...
+ 'res/layout/abc_expanded_menu_layout.xml'...
+ 'res/layout/abc_list_menu_item_checkbox.xml'...
+ 'res/layout/abc_list_menu_item_icon.xml'...
+ 'res/layout/abc_list_menu_item_layout.xml'...
+ 'res/layout/abc_list_menu_item_radio.xml'...
+ 'res/layout/abc_popup_menu_header_item_layout.xml'...
+ 'res/layout/abc_popup_menu_item_layout.xml'...
+ 'res/layout/abc_screen_content_include.xml'...
+ 'res/layout/abc_screen_simple.xml'...
+ 'res/layout/abc_screen_simple_overlay_action_mode.xml'...
+ 'res/layout/abc_screen_toolbar.xml'...
+ 'res/layout/abc_search_dropdown_item_icons_2line.xml'...
+ 'res/layout/abc_search_view.xml'...
+ 'res/layout/abc_select_dialog_material.xml'...
+ 'res/layout/abc_tooltip.xml'...
+ 'res/layout/custom_dialog.xml'...
+ 'res/layout/ime_base_split_test_activity.xml'...
+ 'res/layout/ime_secondary_split_test_activity.xml'...
+ 'res/layout/notification_template_part_chronometer.xml'...
+ 'res/layout/notification_template_part_time.xml'...
+ 'res/layout/select_dialog_item_material.xml'...
+ 'res/layout/select_dialog_multichoice_material.xml'...
+ 'res/layout/select_dialog_singlechoice_material.xml'...
+ 'res/layout/support_simple_spinner_dropdown_item.xml'...
+ 'resources.arsc'...
+ 'win32-x86-64/attach_hotspot_windows.dll'...
+ 'win32-x86/attach_hotspot_windows.dll'...
+aligning built apk
+Verifying alignment of /work/MapRoom/app/build/tmp/packageCivDebugAndroidTest/modAPK/ATAK-Plugin-MapRoom-0.1--5.8.0-civ-debug-androidTest.apk (4)...
+      50 META-INF/MANIFEST.MF (OK - compressed)
+   16340 META-INF/WINTEC_M.SF (OK - compressed)
+   32987 META-INF/WINTEC_M.RSA (OK - compressed)
+   33745 AndroidManifest.xml (OK - compressed)
+   35716 DebugProbesKt.bin (OK)
+   37504 LICENSE-junit.txt (OK)
+   48924 classes.dex (OK)
+11536756 classes2.dex (OK)
+11694404 classes3.dex (OK)
+11695520 classes4.dex (OK)
+11703132 classes5.dex (OK)
+14105372 junit/runner/logo.gif (OK)
+14106392 junit/runner/smalllogo.gif (OK)
+14107352 kotlin/annotation/annotation.kotlin_builtins (OK)
+14108356 kotlin/collections/collections.kotlin_builtins (OK)
+14112116 kotlin/coroutines/coroutines.kotlin_builtins (OK)
+14112388 kotlin/internal/internal.kotlin_builtins (OK)
+14113096 kotlin/kotlin.kotlin_builtins (OK)
+14131824 kotlin/ranges/ranges.kotlin_builtins (OK)
+14135292 kotlin/reflect/reflect.kotlin_builtins (OK)
+14137820 org/mockito/internal/creation/bytebuddy/inject-MockMethodDispatcher.raw (OK)
+14142644 res/anim-v21/fragment_fast_out_extra_slow_in.xml (OK)
+14143064 res/anim/abc_fade_in.xml (OK)
+14143508 res/anim/abc_fade_out.xml (OK)
+14143968 res/anim/abc_grow_fade_in_from_bottom.xml (OK)
+14144880 res/anim/abc_popup_enter.xml (OK)
+14145448 res/anim/abc_popup_exit.xml (OK)
+14146032 res/anim/abc_shrink_fade_out_from_bottom.xml (OK)
+14146948 res/anim/abc_slide_in_bottom.xml (OK)
+14147404 res/anim/abc_slide_in_top.xml (OK)
+14147864 res/anim/abc_slide_out_bottom.xml (OK)
+14148320 res/anim/abc_slide_out_top.xml (OK)
+14148776 res/anim/abc_tooltip_enter.xml (OK)
+14149224 res/anim/abc_tooltip_exit.xml (OK)
+14149708 res/anim/btn_checkbox_to_checked_box_inner_merged_animation.xml (OK)
+14151928 res/anim/btn_checkbox_to_checked_box_outer_merged_animation.xml (OK)
+14154796 res/anim/btn_checkbox_to_checked_icon_null_animation.xml (OK)
+14156088 res/anim/btn_checkbox_to_unchecked_box_inner_merged_animation.xml (OK)
+14158544 res/anim/btn_checkbox_to_unchecked_check_path_merged_animation.xml (OK)
+14161152 res/anim/btn_checkbox_to_unchecked_icon_null_animation.xml (OK)
+14162432 res/anim/btn_radio_to_off_mtrl_dot_group_animation.xml (OK)
+14164176 res/anim/btn_radio_to_off_mtrl_ring_outer_animation.xml (OK)
+14165924 res/anim/btn_radio_to_off_mtrl_ring_outer_path_animation.xml (OK)
+14167036 res/anim/btn_radio_to_on_mtrl_dot_group_animation.xml (OK)
+14168776 res/anim/btn_radio_to_on_mtrl_ring_outer_animation.xml (OK)
+14170524 res/anim/btn_radio_to_on_mtrl_ring_outer_path_animation.xml (OK)
+14171620 res/animator/fragment_close_enter.xml (OK)
+14172816 res/animator/fragment_close_exit.xml (OK)
+14174012 res/animator/fragment_fade_enter.xml (OK)
+14174532 res/animator/fragment_fade_exit.xml (OK)
+14175052 res/animator/fragment_open_enter.xml (OK)
+14176248 res/animator/fragment_open_exit.xml (OK)
+14177464 res/color-v21/abc_btn_colored_borderless_text_material.xml (OK)
+14178016 res/color-v23/abc_btn_colored_borderless_text_material.xml (OK)
+14178596 res/color-v23/abc_btn_colored_text_material.xml (OK)
+14179172 res/color-v23/abc_color_highlight_material.xml (OK)
+14179788 res/color-v23/abc_tint_btn_checkable.xml (OK)
+14180476 res/color-v23/abc_tint_default.xml (OK)
+14181664 res/color-v23/abc_tint_edittext.xml (OK)
+14182400 res/color-v23/abc_tint_seek_thumb.xml (OK)
+14182964 res/color-v23/abc_tint_spinner.xml (OK)
+14183704 res/color-v23/abc_tint_switch_track.xml (OK)
+14184460 res/color/abc_background_cache_hint_selector_material_dark.xml (OK)
+14185024 res/color/abc_background_cache_hint_selector_material_light.xml (OK)
+14185568 res/color/abc_btn_colored_text_material.xml (OK)
+14186252 res/color/abc_hint_foreground_material_dark.xml (OK)
+14186896 res/color/abc_hint_foreground_material_light.xml (OK)
+14187548 res/color/abc_primary_text_disable_only_material_dark.xml (OK)
+14188100 res/color/abc_primary_text_disable_only_material_light.xml (OK)
+14188640 res/color/abc_primary_text_material_dark.xml (OK)
+14189180 res/color/abc_primary_text_material_light.xml (OK)
+14189708 res/color/abc_search_url_text.xml (OK)
+14190372 res/color/abc_secondary_text_material_dark.xml (OK)
+14190916 res/color/abc_secondary_text_material_light.xml (OK)
+14191448 res/color/abc_tint_btn_checkable.xml (OK)
+14192236 res/color/abc_tint_default.xml (OK)
+14193524 res/color/abc_tint_edittext.xml (OK)
+14194360 res/color/abc_tint_seek_thumb.xml (OK)
+14195024 res/color/abc_tint_spinner.xml (OK)
+14195864 res/color/abc_tint_switch_track.xml (OK)
+14196704 res/color/switch_thumb_material_dark.xml (OK)
+14197240 res/color/switch_thumb_material_light.xml (OK)
+14197792 res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png (OK)
+14198148 res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14198460 res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14198948 res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14199496 res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14200148 res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14201332 res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14202668 res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png (OK)
+14202984 res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png (OK)
+14203240 res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png (OK)
+14203488 res/drawable-hdpi-v4/abc_list_focused_holo.9.png (OK)
+14203816 res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png (OK)
+14204112 res/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png (OK)
+14204404 res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png (OK)
+14204708 res/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png (OK)
+14205032 res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png (OK)
+14205352 res/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png (OK)
+14206180 res/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png (OK)
+14207368 res/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png (OK)
+14207664 res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14207956 res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14208316 res/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png (OK)
+14208608 res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png (OK)
+14208888 res/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14209320 res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14209892 res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14210172 res/drawable-hdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14210540 res/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl.png (OK)
+14211024 res/drawable-hdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14211380 res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png (OK)
+14211656 res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png (OK)
+14211948 res/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png (OK)
+14212224 res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png (OK)
+14212488 res/drawable-hdpi-v4/notification_bg_low_normal.9.png (OK)
+14212784 res/drawable-hdpi-v4/notification_bg_low_pressed.9.png (OK)
+14213088 res/drawable-hdpi-v4/notification_bg_normal.9.png (OK)
+14213388 res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png (OK)
+14213704 res/drawable-hdpi-v4/notification_oversize_large_icon_bg.png (OK)
+14214704 res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png (OK)
+14214900 res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14215336 res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14215744 res/drawable-ldrtl-xhdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14216252 res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14216872 res/drawable-ldrtl-xxxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14217396 res/drawable-mdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png (OK)
+14217748 res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14218048 res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14218452 res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14218860 res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14219304 res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14220148 res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14221064 res/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png (OK)
+14221372 res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png (OK)
+14221632 res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png (OK)
+14221880 res/drawable-mdpi-v4/abc_list_focused_holo.9.png (OK)
+14222184 res/drawable-mdpi-v4/abc_list_longpressed_holo.9.png (OK)
+14222480 res/drawable-mdpi-v4/abc_list_pressed_holo_dark.9.png (OK)
+14222772 res/drawable-mdpi-v4/abc_list_pressed_holo_light.9.png (OK)
+14223072 res/drawable-mdpi-v4/abc_list_selector_disabled_holo_dark.9.png (OK)
+14223384 res/drawable-mdpi-v4/abc_list_selector_disabled_holo_light.9.png (OK)
+14223692 res/drawable-mdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png (OK)
+14224320 res/drawable-mdpi-v4/abc_popup_background_mtrl_mult.9.png (OK)
+14225188 res/drawable-mdpi-v4/abc_scrubber_control_off_mtrl_alpha.png (OK)
+14225444 res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14225684 res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14225972 res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png (OK)
+14226264 res/drawable-mdpi-v4/abc_scrubber_track_mtrl_alpha.9.png (OK)
+14226540 res/drawable-mdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14226952 res/drawable-mdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14227432 res/drawable-mdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14227708 res/drawable-mdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14228000 res/drawable-mdpi-v4/abc_text_select_handle_middle_mtrl.png (OK)
+14228400 res/drawable-mdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14228680 res/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png (OK)
+14228952 res/drawable-mdpi-v4/abc_textfield_default_mtrl_alpha.9.png (OK)
+14229228 res/drawable-mdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png (OK)
+14229504 res/drawable-mdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png (OK)
+14229768 res/drawable-mdpi-v4/notification_bg_low_normal.9.png (OK)
+14230068 res/drawable-mdpi-v4/notification_bg_low_pressed.9.png (OK)
+14230372 res/drawable-mdpi-v4/notification_bg_normal.9.png (OK)
+14230676 res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png (OK)
+14230988 res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png (OK)
+14231176 res/drawable-v21/abc_action_bar_item_background_material.xml (OK)
+14231516 res/drawable-v21/abc_btn_colored_material.xml (OK)
+14233316 res/drawable-v21/abc_dialog_material_background.xml (OK)
+14234108 res/drawable-v21/abc_edit_text_material.xml (OK)
+14235356 res/drawable-v21/abc_list_divider_material.xml (OK)
+14235956 res/drawable-v21/notification_action_background.xml (OK)
+14237220 res/drawable-v23/abc_control_background_material.xml (OK)
+14237612 res/drawable-watch-v20/abc_dialog_material_background.xml (OK)
+14238072 res/drawable-xhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png (OK)
+14238436 res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14238804 res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14239320 res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14240056 res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14240932 res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14242548 res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14244372 res/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png (OK)
+14244692 res/drawable-xhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png (OK)
+14245008 res/drawable-xhdpi-v4/abc_list_divider_mtrl_alpha.9.png (OK)
+14245256 res/drawable-xhdpi-v4/abc_list_focused_holo.9.png (OK)
+14245584 res/drawable-xhdpi-v4/abc_list_longpressed_holo.9.png (OK)
+14245884 res/drawable-xhdpi-v4/abc_list_pressed_holo_dark.9.png (OK)
+14246180 res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png (OK)
+14246484 res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_dark.9.png (OK)
+14246816 res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_light.9.png (OK)
+14247144 res/drawable-xhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png (OK)
+14248200 res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png (OK)
+14249836 res/drawable-xhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png (OK)
+14250200 res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14250564 res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14251044 res/drawable-xhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png (OK)
+14251340 res/drawable-xhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png (OK)
+14251624 res/drawable-xhdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14252160 res/drawable-xhdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14252864 res/drawable-xhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14253148 res/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14253576 res/drawable-xhdpi-v4/abc_text_select_handle_middle_mtrl.png (OK)
+14254252 res/drawable-xhdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14254664 res/drawable-xhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png (OK)
+14254944 res/drawable-xhdpi-v4/abc_textfield_default_mtrl_alpha.9.png (OK)
+14255232 res/drawable-xhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png (OK)
+14255516 res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png (OK)
+14255784 res/drawable-xhdpi-v4/notification_bg_low_normal.9.png (OK)
+14256092 res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png (OK)
+14256424 res/drawable-xhdpi-v4/notification_bg_normal.9.png (OK)
+14256736 res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png (OK)
+14257072 res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png (OK)
+14257300 res/drawable-xxhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png (OK)
+14257672 res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14258064 res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14258744 res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14259816 res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14261116 res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14263672 res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14266600 res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png (OK)
+14266932 res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png (OK)
+14267244 res/drawable-xxhdpi-v4/abc_list_divider_mtrl_alpha.9.png (OK)
+14267496 res/drawable-xxhdpi-v4/abc_list_focused_holo.9.png (OK)
+14267828 res/drawable-xxhdpi-v4/abc_list_longpressed_holo.9.png (OK)
+14268136 res/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png (OK)
+14268436 res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png (OK)
+14268744 res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_dark.9.png (OK)
+14269100 res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_light.9.png (OK)
+14269452 res/drawable-xxhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png (OK)
+14271320 res/drawable-xxhdpi-v4/abc_popup_background_mtrl_mult.9.png (OK)
+14273720 res/drawable-xxhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png (OK)
+14274140 res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14274640 res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14275328 res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png (OK)
+14275628 res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png (OK)
+14275920 res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14276532 res/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14277472 res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14277768 res/drawable-xxhdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14278280 res/drawable-xxhdpi-v4/abc_text_select_handle_middle_mtrl.png (OK)
+14279124 res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14279640 res/drawable-xxhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png (OK)
+14279932 res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png (OK)
+14280232 res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png (OK)
+14280520 res/drawable-xxhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png (OK)
+14280792 res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14281156 res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14281720 res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14282592 res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14283632 res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14286228 res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14289144 res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14289660 res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14290376 res/drawable-xxxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14290896 res/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14291800 res/drawable-xxxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14292092 res/drawable-xxxhdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14292696 res/drawable-xxxhdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14293284 res/drawable/abc_btn_borderless_material.xml (OK)
+14293944 res/drawable/abc_btn_check_material.xml (OK)
+14294484 res/drawable/abc_btn_check_material_anim.xml (OK)
+14295376 res/drawable/abc_btn_default_mtrl_shape.xml (OK)
+14296380 res/drawable/abc_btn_radio_material.xml (OK)
+14296920 res/drawable/abc_btn_radio_material_anim.xml (OK)
+14297816 res/drawable/abc_cab_background_internal_bg.xml (OK)
+14298268 res/drawable/abc_cab_background_top_material.xml (OK)
+14298676 res/drawable/abc_ic_ab_back_material.xml (OK)
+14299452 res/drawable/abc_ic_arrow_drop_right_black_24dp.xml (OK)
+14300520 res/drawable/abc_ic_clear_material.xml (OK)
+14301280 res/drawable/abc_ic_go_search_api_material.xml (OK)
+14302000 res/drawable/abc_ic_menu_copy_mtrl_am_alpha.xml (OK)
+14302832 res/drawable/abc_ic_menu_cut_mtrl_alpha.xml (OK)
+14304004 res/drawable/abc_ic_menu_overflow_material.xml (OK)
+14304876 res/drawable/abc_ic_menu_paste_mtrl_am_alpha.xml (OK)
+14305752 res/drawable/abc_ic_menu_selectall_mtrl_alpha.xml (OK)
+14306748 res/drawable/abc_ic_menu_share_mtrl_alpha.xml (OK)
+14307804 res/drawable/abc_ic_search_api_material.xml (OK)
+14308696 res/drawable/abc_ic_voice_search_api_material.xml (OK)
+14309600 res/drawable/abc_item_background_holo_dark.xml (OK)
+14310692 res/drawable/abc_item_background_holo_light.xml (OK)
+14311800 res/drawable/abc_list_selector_background_transition_holo_dark.xml (OK)
+14312324 res/drawable/abc_list_selector_background_transition_holo_light.xml (OK)
+14312824 res/drawable/abc_list_selector_holo_dark.xml (OK)
+14313964 res/drawable/abc_list_selector_holo_light.xml (OK)
+14315108 res/drawable/abc_ratingbar_indicator_material.xml (OK)
+14315304 res/drawable/abc_ratingbar_material.xml (OK)
+14315504 res/drawable/abc_ratingbar_small_material.xml (OK)
+14315704 res/drawable/abc_seekbar_thumb_material.xml (OK)
+14316884 res/drawable/abc_seekbar_tick_mark_material.xml (OK)
+14317476 res/drawable/abc_seekbar_track_material.xml (OK)
+14318972 res/drawable/abc_spinner_textfield_background_material.xml (OK)
+14320200 res/drawable/abc_star_black_48dp.xml (OK)
+14320912 res/drawable/abc_star_half_black_48dp.xml (OK)
+14321584 res/drawable/abc_switch_thumb_material.xml (OK)
+14322124 res/drawable/abc_tab_indicator_material.xml (OK)
+14322664 res/drawable/abc_text_cursor_material.xml (OK)
+14323256 res/drawable/abc_textfield_search_material.xml (OK)
+14324076 res/drawable/abc_vector_test.xml (OK)
+14324760 res/drawable/btn_checkbox_checked_mtrl.xml (OK)
+14327544 res/drawable/btn_checkbox_checked_to_unchecked_mtrl_animation.xml (OK)
+14328308 res/drawable/btn_checkbox_unchecked_mtrl.xml (OK)
+14331064 res/drawable/btn_checkbox_unchecked_to_checked_mtrl_animation.xml (OK)
+14331820 res/drawable/btn_radio_off_mtrl.xml (OK)
+14333632 res/drawable/btn_radio_off_to_on_mtrl_animation.xml (OK)
+14334376 res/drawable/btn_radio_on_mtrl.xml (OK)
+14336116 res/drawable/btn_radio_on_to_off_mtrl_animation.xml (OK)
+14336860 res/drawable/ic_call_answer.xml (OK)
+14338284 res/drawable/ic_call_answer_low.xml (OK)
+14339672 res/drawable/ic_call_answer_video.xml (OK)
+14340516 res/drawable/ic_call_answer_video_low.xml (OK)
+14341316 res/drawable/ic_call_decline.xml (OK)
+14342912 res/drawable/ic_call_decline_low.xml (OK)
+14344468 res/drawable/notification_bg.xml (OK)
+14345068 res/drawable/notification_bg_low.xml (OK)
+14345676 res/drawable/notification_icon_background.xml (OK)
+14346116 res/drawable/notification_tile_bg.xml (OK)
+14346488 res/drawable/test_level_drawable.xml (OK)
+14347004 res/drawable/tooltip_frame_dark.xml (OK)
+14347556 res/drawable/tooltip_frame_light.xml (OK)
+14348144 res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_0.xml (OK)
+14348564 res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_1.xml (OK)
+14348996 res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml (OK)
+14349416 res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml (OK)
+14349844 res/interpolator/btn_radio_to_off_mtrl_animation_interpolator_0.xml (OK)
+14350260 res/interpolator/btn_radio_to_on_mtrl_animation_interpolator_0.xml (OK)
+14350648 res/interpolator/fast_out_slow_in.xml (OK)
+14351116 res/layout-v21/notification_action.xml (OK)
+14352248 res/layout-v21/notification_action_tombstone.xml (OK)
+14353560 res/layout-v21/notification_template_custom_big.xml (OK)
+14356100 res/layout-v21/notification_template_icon_group.xml (OK)
+14357176 res/layout-v22/abc_alert_dialog_button_bar_material.xml (OK)
+14358828 res/layout-v26/abc_screen_toolbar.xml (OK)
+14360480 res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml (OK)
+14361776 res/layout-watch-v20/abc_alert_dialog_title_material.xml (OK)
+14363200 res/layout/abc_action_bar_title_item.xml (OK)
+14364144 res/layout/abc_action_bar_up_container.xml (OK)
+14364656 res/layout/abc_action_menu_item_layout.xml (OK)
+14365492 res/layout/abc_action_menu_layout.xml (OK)
+14366132 res/layout/abc_action_mode_bar.xml (OK)
+14366676 res/layout/abc_action_mode_close_item_material.xml (OK)
+14367588 res/layout/abc_activity_chooser_view.xml (OK)
+14369352 res/layout/abc_activity_chooser_view_list_item.xml (OK)
+14370740 res/layout/abc_alert_dialog_button_bar_material.xml (OK)
+14372348 res/layout/abc_alert_dialog_material.xml (OK)
+14375072 res/layout/abc_alert_dialog_title_material.xml (OK)
+14376708 res/layout/abc_cascading_menu_item_layout.xml (OK)
+14378648 res/layout/abc_dialog_title_material.xml (OK)
+14379836 res/layout/abc_expanded_menu_layout.xml (OK)
+14380296 res/layout/abc_list_menu_item_checkbox.xml (OK)
+14380892 res/layout/abc_list_menu_item_icon.xml (OK)
+14381744 res/layout/abc_list_menu_item_layout.xml (OK)
+14383212 res/layout/abc_list_menu_item_radio.xml (OK)
+14383824 res/layout/abc_popup_menu_header_item_layout.xml (OK)
+14384744 res/layout/abc_popup_menu_item_layout.xml (OK)
+14386888 res/layout/abc_screen_content_include.xml (OK)
+14387500 res/layout/abc_screen_simple.xml (OK)
+14388416 res/layout/abc_screen_simple_overlay_action_mode.xml (OK)
+14389272 res/layout/abc_screen_toolbar.xml (OK)
+14390860 res/layout/abc_search_dropdown_item_icons_2line.xml (OK)
+14392836 res/layout/abc_search_view.xml (OK)
+14396380 res/layout/abc_select_dialog_material.xml (OK)
+14397456 res/layout/abc_tooltip.xml (OK)
+14398572 res/layout/custom_dialog.xml (OK)
+14399260 res/layout/ime_base_split_test_activity.xml (OK)
+14399704 res/layout/ime_secondary_split_test_activity.xml (OK)
+14400664 res/layout/notification_template_part_chronometer.xml (OK)
+14401180 res/layout/notification_template_part_time.xml (OK)
+14401692 res/layout/select_dialog_item_material.xml (OK)
+14402412 res/layout/select_dialog_multichoice_material.xml (OK)
+14403356 res/layout/select_dialog_singlechoice_material.xml (OK)
+14404304 res/layout/support_simple_spinner_dropdown_item.xml (OK)
+14404812 resources.arsc (OK)
+14678460 win32-x86-64/attach_hotspot_windows.dll (OK)
+14980372 win32-x86/attach_hotspot_windows.dll (OK)
+Verification succesful
+checking alignment of built apk: /work/MapRoom/app/build/tmp/packageCivDebugAndroidTest/modAPK/ATAK-Plugin-MapRoom-0.1--5.8.0-civ-debug-androidTest.apk
+Verifying alignment of /work/MapRoom/app/build/tmp/packageCivDebugAndroidTest/modAPK/ATAK-Plugin-MapRoom-0.1--5.8.0-civ-debug-androidTest.apk (4)...
+      50 META-INF/MANIFEST.MF (OK - compressed)
+   16340 META-INF/WINTEC_M.SF (OK - compressed)
+   32987 META-INF/WINTEC_M.RSA (OK - compressed)
+   33745 AndroidManifest.xml (OK - compressed)
+   35716 DebugProbesKt.bin (OK)
+   37504 LICENSE-junit.txt (OK)
+   48924 classes.dex (OK)
+11536756 classes2.dex (OK)
+11694404 classes3.dex (OK)
+11695520 classes4.dex (OK)
+11703132 classes5.dex (OK)
+14105372 junit/runner/logo.gif (OK)
+14106392 junit/runner/smalllogo.gif (OK)
+14107352 kotlin/annotation/annotation.kotlin_builtins (OK)
+14108356 kotlin/collections/collections.kotlin_builtins (OK)
+14112116 kotlin/coroutines/coroutines.kotlin_builtins (OK)
+14112388 kotlin/internal/internal.kotlin_builtins (OK)
+14113096 kotlin/kotlin.kotlin_builtins (OK)
+14131824 kotlin/ranges/ranges.kotlin_builtins (OK)
+14135292 kotlin/reflect/reflect.kotlin_builtins (OK)
+14137820 org/mockito/internal/creation/bytebuddy/inject-MockMethodDispatcher.raw (OK)
+14142644 res/anim-v21/fragment_fast_out_extra_slow_in.xml (OK)
+14143064 res/anim/abc_fade_in.xml (OK)
+14143508 res/anim/abc_fade_out.xml (OK)
+14143968 res/anim/abc_grow_fade_in_from_bottom.xml (OK)
+14144880 res/anim/abc_popup_enter.xml (OK)
+14145448 res/anim/abc_popup_exit.xml (OK)
+14146032 res/anim/abc_shrink_fade_out_from_bottom.xml (OK)
+14146948 res/anim/abc_slide_in_bottom.xml (OK)
+14147404 res/anim/abc_slide_in_top.xml (OK)
+14147864 res/anim/abc_slide_out_bottom.xml (OK)
+14148320 res/anim/abc_slide_out_top.xml (OK)
+14148776 res/anim/abc_tooltip_enter.xml (OK)
+14149224 res/anim/abc_tooltip_exit.xml (OK)
+14149708 res/anim/btn_checkbox_to_checked_box_inner_merged_animation.xml (OK)
+14151928 res/anim/btn_checkbox_to_checked_box_outer_merged_animation.xml (OK)
+14154796 res/anim/btn_checkbox_to_checked_icon_null_animation.xml (OK)
+14156088 res/anim/btn_checkbox_to_unchecked_box_inner_merged_animation.xml (OK)
+14158544 res/anim/btn_checkbox_to_unchecked_check_path_merged_animation.xml (OK)
+14161152 res/anim/btn_checkbox_to_unchecked_icon_null_animation.xml (OK)
+14162432 res/anim/btn_radio_to_off_mtrl_dot_group_animation.xml (OK)
+14164176 res/anim/btn_radio_to_off_mtrl_ring_outer_animation.xml (OK)
+14165924 res/anim/btn_radio_to_off_mtrl_ring_outer_path_animation.xml (OK)
+14167036 res/anim/btn_radio_to_on_mtrl_dot_group_animation.xml (OK)
+14168776 res/anim/btn_radio_to_on_mtrl_ring_outer_animation.xml (OK)
+14170524 res/anim/btn_radio_to_on_mtrl_ring_outer_path_animation.xml (OK)
+14171620 res/animator/fragment_close_enter.xml (OK)
+14172816 res/animator/fragment_close_exit.xml (OK)
+14174012 res/animator/fragment_fade_enter.xml (OK)
+14174532 res/animator/fragment_fade_exit.xml (OK)
+14175052 res/animator/fragment_open_enter.xml (OK)
+14176248 res/animator/fragment_open_exit.xml (OK)
+14177464 res/color-v21/abc_btn_colored_borderless_text_material.xml (OK)
+14178016 res/color-v23/abc_btn_colored_borderless_text_material.xml (OK)
+14178596 res/color-v23/abc_btn_colored_text_material.xml (OK)
+14179172 res/color-v23/abc_color_highlight_material.xml (OK)
+14179788 res/color-v23/abc_tint_btn_checkable.xml (OK)
+14180476 res/color-v23/abc_tint_default.xml (OK)
+14181664 res/color-v23/abc_tint_edittext.xml (OK)
+14182400 res/color-v23/abc_tint_seek_thumb.xml (OK)
+14182964 res/color-v23/abc_tint_spinner.xml (OK)
+14183704 res/color-v23/abc_tint_switch_track.xml (OK)
+14184460 res/color/abc_background_cache_hint_selector_material_dark.xml (OK)
+14185024 res/color/abc_background_cache_hint_selector_material_light.xml (OK)
+14185568 res/color/abc_btn_colored_text_material.xml (OK)
+14186252 res/color/abc_hint_foreground_material_dark.xml (OK)
+14186896 res/color/abc_hint_foreground_material_light.xml (OK)
+14187548 res/color/abc_primary_text_disable_only_material_dark.xml (OK)
+14188100 res/color/abc_primary_text_disable_only_material_light.xml (OK)
+14188640 res/color/abc_primary_text_material_dark.xml (OK)
+14189180 res/color/abc_primary_text_material_light.xml (OK)
+14189708 res/color/abc_search_url_text.xml (OK)
+14190372 res/color/abc_secondary_text_material_dark.xml (OK)
+14190916 res/color/abc_secondary_text_material_light.xml (OK)
+14191448 res/color/abc_tint_btn_checkable.xml (OK)
+14192236 res/color/abc_tint_default.xml (OK)
+14193524 res/color/abc_tint_edittext.xml (OK)
+14194360 res/color/abc_tint_seek_thumb.xml (OK)
+14195024 res/color/abc_tint_spinner.xml (OK)
+14195864 res/color/abc_tint_switch_track.xml (OK)
+14196704 res/color/switch_thumb_material_dark.xml (OK)
+14197240 res/color/switch_thumb_material_light.xml (OK)
+14197792 res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png (OK)
+14198148 res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14198460 res/drawable-hdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14198948 res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14199496 res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14200148 res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14201332 res/drawable-hdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14202668 res/drawable-hdpi-v4/abc_cab_background_top_mtrl_alpha.9.png (OK)
+14202984 res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png (OK)
+14203240 res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png (OK)
+14203488 res/drawable-hdpi-v4/abc_list_focused_holo.9.png (OK)
+14203816 res/drawable-hdpi-v4/abc_list_longpressed_holo.9.png (OK)
+14204112 res/drawable-hdpi-v4/abc_list_pressed_holo_dark.9.png (OK)
+14204404 res/drawable-hdpi-v4/abc_list_pressed_holo_light.9.png (OK)
+14204708 res/drawable-hdpi-v4/abc_list_selector_disabled_holo_dark.9.png (OK)
+14205032 res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png (OK)
+14205352 res/drawable-hdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png (OK)
+14206180 res/drawable-hdpi-v4/abc_popup_background_mtrl_mult.9.png (OK)
+14207368 res/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png (OK)
+14207664 res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14207956 res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14208316 res/drawable-hdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png (OK)
+14208608 res/drawable-hdpi-v4/abc_scrubber_track_mtrl_alpha.9.png (OK)
+14208888 res/drawable-hdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14209320 res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14209892 res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14210172 res/drawable-hdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14210540 res/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl.png (OK)
+14211024 res/drawable-hdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14211380 res/drawable-hdpi-v4/abc_textfield_activated_mtrl_alpha.9.png (OK)
+14211656 res/drawable-hdpi-v4/abc_textfield_default_mtrl_alpha.9.png (OK)
+14211948 res/drawable-hdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png (OK)
+14212224 res/drawable-hdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png (OK)
+14212488 res/drawable-hdpi-v4/notification_bg_low_normal.9.png (OK)
+14212784 res/drawable-hdpi-v4/notification_bg_low_pressed.9.png (OK)
+14213088 res/drawable-hdpi-v4/notification_bg_normal.9.png (OK)
+14213388 res/drawable-hdpi-v4/notification_bg_normal_pressed.9.png (OK)
+14213704 res/drawable-hdpi-v4/notification_oversize_large_icon_bg.png (OK)
+14214704 res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png (OK)
+14214900 res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14215336 res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14215744 res/drawable-ldrtl-xhdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14216252 res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14216872 res/drawable-ldrtl-xxxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png (OK)
+14217396 res/drawable-mdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png (OK)
+14217748 res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14218048 res/drawable-mdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14218452 res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14218860 res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14219304 res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14220148 res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14221064 res/drawable-mdpi-v4/abc_cab_background_top_mtrl_alpha.9.png (OK)
+14221372 res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png (OK)
+14221632 res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png (OK)
+14221880 res/drawable-mdpi-v4/abc_list_focused_holo.9.png (OK)
+14222184 res/drawable-mdpi-v4/abc_list_longpressed_holo.9.png (OK)
+14222480 res/drawable-mdpi-v4/abc_list_pressed_holo_dark.9.png (OK)
+14222772 res/drawable-mdpi-v4/abc_list_pressed_holo_light.9.png (OK)
+14223072 res/drawable-mdpi-v4/abc_list_selector_disabled_holo_dark.9.png (OK)
+14223384 res/drawable-mdpi-v4/abc_list_selector_disabled_holo_light.9.png (OK)
+14223692 res/drawable-mdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png (OK)
+14224320 res/drawable-mdpi-v4/abc_popup_background_mtrl_mult.9.png (OK)
+14225188 res/drawable-mdpi-v4/abc_scrubber_control_off_mtrl_alpha.png (OK)
+14225444 res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14225684 res/drawable-mdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14225972 res/drawable-mdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png (OK)
+14226264 res/drawable-mdpi-v4/abc_scrubber_track_mtrl_alpha.9.png (OK)
+14226540 res/drawable-mdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14226952 res/drawable-mdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14227432 res/drawable-mdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14227708 res/drawable-mdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14228000 res/drawable-mdpi-v4/abc_text_select_handle_middle_mtrl.png (OK)
+14228400 res/drawable-mdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14228680 res/drawable-mdpi-v4/abc_textfield_activated_mtrl_alpha.9.png (OK)
+14228952 res/drawable-mdpi-v4/abc_textfield_default_mtrl_alpha.9.png (OK)
+14229228 res/drawable-mdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png (OK)
+14229504 res/drawable-mdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png (OK)
+14229768 res/drawable-mdpi-v4/notification_bg_low_normal.9.png (OK)
+14230068 res/drawable-mdpi-v4/notification_bg_low_pressed.9.png (OK)
+14230372 res/drawable-mdpi-v4/notification_bg_normal.9.png (OK)
+14230676 res/drawable-mdpi-v4/notification_bg_normal_pressed.9.png (OK)
+14230988 res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png (OK)
+14231176 res/drawable-v21/abc_action_bar_item_background_material.xml (OK)
+14231516 res/drawable-v21/abc_btn_colored_material.xml (OK)
+14233316 res/drawable-v21/abc_dialog_material_background.xml (OK)
+14234108 res/drawable-v21/abc_edit_text_material.xml (OK)
+14235356 res/drawable-v21/abc_list_divider_material.xml (OK)
+14235956 res/drawable-v21/notification_action_background.xml (OK)
+14237220 res/drawable-v23/abc_control_background_material.xml (OK)
+14237612 res/drawable-watch-v20/abc_dialog_material_background.xml (OK)
+14238072 res/drawable-xhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png (OK)
+14238436 res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14238804 res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14239320 res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14240056 res/drawable-xhdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14240932 res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14242548 res/drawable-xhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14244372 res/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png (OK)
+14244692 res/drawable-xhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png (OK)
+14245008 res/drawable-xhdpi-v4/abc_list_divider_mtrl_alpha.9.png (OK)
+14245256 res/drawable-xhdpi-v4/abc_list_focused_holo.9.png (OK)
+14245584 res/drawable-xhdpi-v4/abc_list_longpressed_holo.9.png (OK)
+14245884 res/drawable-xhdpi-v4/abc_list_pressed_holo_dark.9.png (OK)
+14246180 res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png (OK)
+14246484 res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_dark.9.png (OK)
+14246816 res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_light.9.png (OK)
+14247144 res/drawable-xhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png (OK)
+14248200 res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png (OK)
+14249836 res/drawable-xhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png (OK)
+14250200 res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14250564 res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14251044 res/drawable-xhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png (OK)
+14251340 res/drawable-xhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png (OK)
+14251624 res/drawable-xhdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14252160 res/drawable-xhdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14252864 res/drawable-xhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14253148 res/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14253576 res/drawable-xhdpi-v4/abc_text_select_handle_middle_mtrl.png (OK)
+14254252 res/drawable-xhdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14254664 res/drawable-xhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png (OK)
+14254944 res/drawable-xhdpi-v4/abc_textfield_default_mtrl_alpha.9.png (OK)
+14255232 res/drawable-xhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png (OK)
+14255516 res/drawable-xhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png (OK)
+14255784 res/drawable-xhdpi-v4/notification_bg_low_normal.9.png (OK)
+14256092 res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png (OK)
+14256424 res/drawable-xhdpi-v4/notification_bg_normal.9.png (OK)
+14256736 res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png (OK)
+14257072 res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png (OK)
+14257300 res/drawable-xxhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png (OK)
+14257672 res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14258064 res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14258744 res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14259816 res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14261116 res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14263672 res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14266600 res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png (OK)
+14266932 res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png (OK)
+14267244 res/drawable-xxhdpi-v4/abc_list_divider_mtrl_alpha.9.png (OK)
+14267496 res/drawable-xxhdpi-v4/abc_list_focused_holo.9.png (OK)
+14267828 res/drawable-xxhdpi-v4/abc_list_longpressed_holo.9.png (OK)
+14268136 res/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png (OK)
+14268436 res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png (OK)
+14268744 res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_dark.9.png (OK)
+14269100 res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_light.9.png (OK)
+14269452 res/drawable-xxhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png (OK)
+14271320 res/drawable-xxhdpi-v4/abc_popup_background_mtrl_mult.9.png (OK)
+14273720 res/drawable-xxhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png (OK)
+14274140 res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14274640 res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14275328 res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png (OK)
+14275628 res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png (OK)
+14275920 res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14276532 res/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14277472 res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14277768 res/drawable-xxhdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14278280 res/drawable-xxhdpi-v4/abc_text_select_handle_middle_mtrl.png (OK)
+14279124 res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14279640 res/drawable-xxhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png (OK)
+14279932 res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png (OK)
+14280232 res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png (OK)
+14280520 res/drawable-xxhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png (OK)
+14280792 res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_000.png (OK)
+14281156 res/drawable-xxxhdpi-v4/abc_btn_check_to_on_mtrl_015.png (OK)
+14281720 res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png (OK)
+14282592 res/drawable-xxxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png (OK)
+14283632 res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png (OK)
+14286228 res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png (OK)
+14289144 res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png (OK)
+14289660 res/drawable-xxxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png (OK)
+14290376 res/drawable-xxxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png (OK)
+14290896 res/drawable-xxxhdpi-v4/abc_switch_track_mtrl_alpha.9.png (OK)
+14291800 res/drawable-xxxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png (OK)
+14292092 res/drawable-xxxhdpi-v4/abc_text_select_handle_left_mtrl.png (OK)
+14292696 res/drawable-xxxhdpi-v4/abc_text_select_handle_right_mtrl.png (OK)
+14293284 res/drawable/abc_btn_borderless_material.xml (OK)
+14293944 res/drawable/abc_btn_check_material.xml (OK)
+14294484 res/drawable/abc_btn_check_material_anim.xml (OK)
+14295376 res/drawable/abc_btn_default_mtrl_shape.xml (OK)
+14296380 res/drawable/abc_btn_radio_material.xml (OK)
+14296920 res/drawable/abc_btn_radio_material_anim.xml (OK)
+14297816 res/drawable/abc_cab_background_internal_bg.xml (OK)
+14298268 res/drawable/abc_cab_background_top_material.xml (OK)
+14298676 res/drawable/abc_ic_ab_back_material.xml (OK)
+14299452 res/drawable/abc_ic_arrow_drop_right_black_24dp.xml (OK)
+14300520 res/drawable/abc_ic_clear_material.xml (OK)
+14301280 res/drawable/abc_ic_go_search_api_material.xml (OK)
+14302000 res/drawable/abc_ic_menu_copy_mtrl_am_alpha.xml (OK)
+14302832 res/drawable/abc_ic_menu_cut_mtrl_alpha.xml (OK)
+14304004 res/drawable/abc_ic_menu_overflow_material.xml (OK)
+14304876 res/drawable/abc_ic_menu_paste_mtrl_am_alpha.xml (OK)
+14305752 res/drawable/abc_ic_menu_selectall_mtrl_alpha.xml (OK)
+14306748 res/drawable/abc_ic_menu_share_mtrl_alpha.xml (OK)
+14307804 res/drawable/abc_ic_search_api_material.xml (OK)
+14308696 res/drawable/abc_ic_voice_search_api_material.xml (OK)
+14309600 res/drawable/abc_item_background_holo_dark.xml (OK)
+14310692 res/drawable/abc_item_background_holo_light.xml (OK)
+14311800 res/drawable/abc_list_selector_background_transition_holo_dark.xml (OK)
+14312324 res/drawable/abc_list_selector_background_transition_holo_light.xml (OK)
+14312824 res/drawable/abc_list_selector_holo_dark.xml (OK)
+14313964 res/drawable/abc_list_selector_holo_light.xml (OK)
+14315108 res/drawable/abc_ratingbar_indicator_material.xml (OK)
+14315304 res/drawable/abc_ratingbar_material.xml (OK)
+14315504 res/drawable/abc_ratingbar_small_material.xml (OK)
+14315704 res/drawable/abc_seekbar_thumb_material.xml (OK)
+14316884 res/drawable/abc_seekbar_tick_mark_material.xml (OK)
+14317476 res/drawable/abc_seekbar_track_material.xml (OK)
+14318972 res/drawable/abc_spinner_textfield_background_material.xml (OK)
+14320200 res/drawable/abc_star_black_48dp.xml (OK)
+14320912 res/drawable/abc_star_half_black_48dp.xml (OK)
+14321584 res/drawable/abc_switch_thumb_material.xml (OK)
+14322124 res/drawable/abc_tab_indicator_material.xml (OK)
+14322664 res/drawable/abc_text_cursor_material.xml (OK)
+14323256 res/drawable/abc_textfield_search_material.xml (OK)
+14324076 res/drawable/abc_vector_test.xml (OK)
+14324760 res/drawable/btn_checkbox_checked_mtrl.xml (OK)
+14327544 res/drawable/btn_checkbox_checked_to_unchecked_mtrl_animation.xml (OK)
+14328308 res/drawable/btn_checkbox_unchecked_mtrl.xml (OK)
+14331064 res/drawable/btn_checkbox_unchecked_to_checked_mtrl_animation.xml (OK)
+14331820 res/drawable/btn_radio_off_mtrl.xml (OK)
+14333632 res/drawable/btn_radio_off_to_on_mtrl_animation.xml (OK)
+14334376 res/drawable/btn_radio_on_mtrl.xml (OK)
+14336116 res/drawable/btn_radio_on_to_off_mtrl_animation.xml (OK)
+14336860 res/drawable/ic_call_answer.xml (OK)
+14338284 res/drawable/ic_call_answer_low.xml (OK)
+14339672 res/drawable/ic_call_answer_video.xml (OK)
+14340516 res/drawable/ic_call_answer_video_low.xml (OK)
+14341316 res/drawable/ic_call_decline.xml (OK)
+14342912 res/drawable/ic_call_decline_low.xml (OK)
+14344468 res/drawable/notification_bg.xml (OK)
+14345068 res/drawable/notification_bg_low.xml (OK)
+14345676 res/drawable/notification_icon_background.xml (OK)
+14346116 res/drawable/notification_tile_bg.xml (OK)
+14346488 res/drawable/test_level_drawable.xml (OK)
+14347004 res/drawable/tooltip_frame_dark.xml (OK)
+14347556 res/drawable/tooltip_frame_light.xml (OK)
+14348144 res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_0.xml (OK)
+14348564 res/interpolator/btn_checkbox_checked_mtrl_animation_interpolator_1.xml (OK)
+14348996 res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml (OK)
+14349416 res/interpolator/btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml (OK)
+14349844 res/interpolator/btn_radio_to_off_mtrl_animation_interpolator_0.xml (OK)
+14350260 res/interpolator/btn_radio_to_on_mtrl_animation_interpolator_0.xml (OK)
+14350648 res/interpolator/fast_out_slow_in.xml (OK)
+14351116 res/layout-v21/notification_action.xml (OK)
+14352248 res/layout-v21/notification_action_tombstone.xml (OK)
+14353560 res/layout-v21/notification_template_custom_big.xml (OK)
+14356100 res/layout-v21/notification_template_icon_group.xml (OK)
+14357176 res/layout-v22/abc_alert_dialog_button_bar_material.xml (OK)
+14358828 res/layout-v26/abc_screen_toolbar.xml (OK)
+14360480 res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml (OK)
+14361776 res/layout-watch-v20/abc_alert_dialog_title_material.xml (OK)
+14363200 res/layout/abc_action_bar_title_item.xml (OK)
+14364144 res/layout/abc_action_bar_up_container.xml (OK)
+14364656 res/layout/abc_action_menu_item_layout.xml (OK)
+14365492 res/layout/abc_action_menu_layout.xml (OK)
+14366132 res/layout/abc_action_mode_bar.xml (OK)
+14366676 res/layout/abc_action_mode_close_item_material.xml (OK)
+14367588 res/layout/abc_activity_chooser_view.xml (OK)
+14369352 res/layout/abc_activity_chooser_view_list_item.xml (OK)
+14370740 res/layout/abc_alert_dialog_button_bar_material.xml (OK)
+14372348 res/layout/abc_alert_dialog_material.xml (OK)
+14375072 res/layout/abc_alert_dialog_title_material.xml (OK)
+14376708 res/layout/abc_cascading_menu_item_layout.xml (OK)
+14378648 res/layout/abc_dialog_title_material.xml (OK)
+14379836 res/layout/abc_expanded_menu_layout.xml (OK)
+14380296 res/layout/abc_list_menu_item_checkbox.xml (OK)
+14380892 res/layout/abc_list_menu_item_icon.xml (OK)
+14381744 res/layout/abc_list_menu_item_layout.xml (OK)
+14383212 res/layout/abc_list_menu_item_radio.xml (OK)
+14383824 res/layout/abc_popup_menu_header_item_layout.xml (OK)
+14384744 res/layout/abc_popup_menu_item_layout.xml (OK)
+14386888 res/layout/abc_screen_content_include.xml (OK)
+14387500 res/layout/abc_screen_simple.xml (OK)
+14388416 res/layout/abc_screen_simple_overlay_action_mode.xml (OK)
+14389272 res/layout/abc_screen_toolbar.xml (OK)
+14390860 res/layout/abc_search_dropdown_item_icons_2line.xml (OK)
+14392836 res/layout/abc_search_view.xml (OK)
+14396380 res/layout/abc_select_dialog_material.xml (OK)
+14397456 res/layout/abc_tooltip.xml (OK)
+14398572 res/layout/custom_dialog.xml (OK)
+14399260 res/layout/ime_base_split_test_activity.xml (OK)
+14399704 res/layout/ime_secondary_split_test_activity.xml (OK)
+14400664 res/layout/notification_template_part_chronometer.xml (OK)
+14401180 res/layout/notification_template_part_time.xml (OK)
+14401692 res/layout/select_dialog_item_material.xml (OK)
+14402412 res/layout/select_dialog_multichoice_material.xml (OK)
+14403356 res/layout/select_dialog_singlechoice_material.xml (OK)
+14404304 res/layout/support_simple_spinner_dropdown_item.xml (OK)
+14404812 resources.arsc (OK)
+14678460 win32-x86-64/attach_hotspot_windows.dll (OK)
+14980372 win32-x86/attach_hotspot_windows.dll (OK)
+Verification succesful
+signing apk: /work/MapRoom/app/build/tmp/packageCivDebugAndroidTest/modAPK/ATAK-Plugin-MapRoom-0.1--5.8.0-civ-debug-androidTest.apk
+overwriting built apk with: /work/MapRoom/app/build/tmp/packageCivDebugAndroidTest/modAPK/ATAK-Plugin-MapRoom-0.1--5.8.0-civ-debug-androidTest.apk
+
+[Incubating] Problems report is available at: file:///work/MapRoom/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 2s
+67 actionable tasks: 8 executed, 59 up-to-date
+==> instrument com.atakmap.android.maproom.plugin.test
+
+com.atakmap.android.maproom.install.MapSourceInstallerTest:.....
+
+Time: 19.84
+
+OK (5 tests)
+
+
+==> PASSED
+EXIT=0

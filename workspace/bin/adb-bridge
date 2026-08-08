@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+"""Forward 127.0.0.1:5037 in the container to the host's adb server.
+
+ADB_SERVER_SOCKET is enough for the adb command line, but not for Gradle: the
+Android plugin's device monitor shells out to `adb start-server` and then dials
+127.0.0.1:5037 itself. With ADB_SERVER_SOCKET pointing at the host, that start
+attempt tries to bind an address the container does not own, fails, and the
+connectedAndroidTest task sits retrying for as long as you let it.
+
+Running this instead means adb inside the container behaves exactly as if the
+server were local, so nothing has to be configured to know better.
+
+  /work/bin/adb-bridge &        # then unset ADB_SERVER_SOCKET
+"""
+import os
+import socket
+import sys
+import threading
+
+HOST_ENDPOINT = os.environ.get("ADB_BRIDGE_TARGET", "host.docker.internal:5037")
+LISTEN_PORT = int(os.environ.get("ADB_BRIDGE_PORT", "5037"))
+
+
+def pump(source, sink):
+    try:
+        while True:
+            chunk = source.recv(65536)
+            if not chunk:
+                break
+            sink.sendall(chunk)
+    except OSError:
+        pass
+    finally:
+        for s in (source, sink):
+            try:
+                s.shutdown(socket.SHUT_RDWR)
+            except OSError:
+                pass
+
+
+def serve(client):
+    host, port = HOST_ENDPOINT.rsplit(":", 1)
+    try:
+        upstream = socket.create_connection((host, int(port)), timeout=10)
+    except OSError as e:
+        print(f"cannot reach adb server at {HOST_ENDPOINT}: {e}", file=sys.stderr)
+        client.close()
+        return
+    threading.Thread(target=pump, args=(client, upstream), daemon=True).start()
+    threading.Thread(target=pump, args=(upstream, client), daemon=True).start()
+
+
+def main():
+    listener = socket.socket()
+    listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    try:
+        listener.bind(("127.0.0.1", LISTEN_PORT))
+    except OSError as e:
+        print(f"port {LISTEN_PORT} is already in use ({e}) — bridge already running?",
+              file=sys.stderr)
+        return 1
+    listener.listen(64)
+    print(f"adb bridge: 127.0.0.1:{LISTEN_PORT} -> {HOST_ENDPOINT}", flush=True)
+    while True:
+        client, _ = listener.accept()
+        serve(client)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
