@@ -295,6 +295,8 @@ or set `ndk.dir` if you need JNI.
 | `connectedAndroidTest` produces nothing for minutes | Gradle's device monitor cannot reach adb. Use `/work/bin/instrument`; never set `ADB_SERVER_SOCKET`. |
 | `Failed to initialize AndroidDebugBridge` | Gradle's Unified Test Platform against the forwarded socket. Use `/work/bin/instrument`. |
 | Instrumented tests die on `NoClassDefFoundError` for ATAK classes | The `_modApk` task did not run, so the tests target your plugin instead of ATAK. |
+| Instrumented runs produce no output at all, `adb` exits 255 | A quiet adb connection was torn down. If you wrote your own port forwarder, clear the connect timeout after connecting — it otherwise applies to every read. |
+| `adb install` fails with an empty message, or `Failure calling service package: Broken pipe` | The emulator's package service is wedged after many install cycles. `adb reboot`. |
 | `Cannot add task 'clearScreenshots'` | `espresso/testSetup.gradle` applied twice — takdev already applies it. |
 | Every XML document fails to parse on device but not in unit tests | Android's parser rejects `disallow-doctype-decl`. See the `atak-plugin` skill, `references/android-gotchas.md`. |
 | `mapping.txt (Read-only file system)` | SDK mount is read-only; takdev writes into it. Drop any `:ro`. |

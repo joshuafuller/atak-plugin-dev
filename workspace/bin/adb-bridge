@@ -46,6 +46,14 @@ def serve(client):
         print(f"cannot reach adb server at {HOST_ENDPOINT}: {e}", file=sys.stderr)
         client.close()
         return
+
+    # The connect timeout stays on the socket and would then apply to every
+    # recv. adb connections are long-lived and often quiet — `am instrument`
+    # streams nothing for the length of a test run — so leaving it set tears
+    # the connection down mid-command. Short commands survive it, which makes
+    # the failure look intermittent rather than systematic.
+    upstream.settimeout(None)
+    client.settimeout(None)
     threading.Thread(target=pump, args=(client, upstream), daemon=True).start()
     threading.Thread(target=pump, args=(upstream, client), daemon=True).start()
 

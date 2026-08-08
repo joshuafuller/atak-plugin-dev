@@ -46,6 +46,12 @@ echo "==> instrument $TEST_PKG"
 ARGS=(-w -e listener com.atakmap.android.test.helpers.ATAKStarter)
 [[ -n "$FILTER" ]] && ARGS+=(-e class "$FILTER")
 
+# Start from a known state. ATAKStarter launches ATAK itself, and racing a
+# still-shutting-down instance from a previous run produces a run with no
+# output at all — which looks like a tooling failure rather than a test result.
+adb shell am force-stop com.atakmap.app.civ
+sleep 3
+
 adb shell am instrument "${ARGS[@]}" "$TEST_PKG/$RUNNER" 2>&1 | tee /tmp/instrument.out
 
 # `am instrument` exits 0 even when tests fail, so decide from the output.

@@ -62,8 +62,12 @@ RUN useradd -m -u 1000 -s /bin/bash dev \
 USER dev
 WORKDIR /work
 
-# adb talks to the emulator running on the host.
-ENV ADB_SERVER_SOCKET=tcp:host.docker.internal:5037
+# adb deliberately gets NO ADB_SERVER_SOCKET. The container reaches the host's
+# adb server through a forwarder on its own 127.0.0.1:5037 (workspace/bin/adb-bridge,
+# started by the compose command) so that adb behaves exactly as if the server
+# were local. Setting ADB_SERVER_SOCKET instead breaks Gradle: its device
+# monitor ignores the variable, runs `adb start-server`, cannot bind, and then
+# retries for as long as you let it.
 
 # Stay alive so you can `docker compose exec atak-dev bash` and poke around.
 CMD ["sleep", "infinity"]
