@@ -38,6 +38,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get update && apt-get install -y --no-install-recommends gh \
     && rm -rf /var/lib/apt/lists/*
 
+# Scanners, so a project can be checked without anyone installing anything
+# first. Trivy covers secrets, dependency vulnerabilities, licences and IaC in
+# one binary; gitleaks is kept alongside it because it reads git history, which
+# is where a committed secret actually lives. Both are driven by `scan`.
+RUN curl -fsSL https://aquasecurity.github.io/trivy-repo/deb/public.key \
+        | gpg --dearmor -o /usr/share/keyrings/trivy.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" \
+        > /etc/apt/sources.list.d/trivy.list \
+    && apt-get update && apt-get install -y --no-install-recommends trivy \
+    && rm -rf /var/lib/apt/lists/* \
+    && GITLEAKS=8.21.2 \
+    && curl -fsSL -o /tmp/gitleaks.tar.gz \
+        "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS}/gitleaks_${GITLEAKS}_linux_x64.tar.gz" \
+    && tar -xzf /tmp/gitleaks.tar.gz -C /usr/local/bin gitleaks \
+    && rm /tmp/gitleaks.tar.gz \
+    && chmod +x /usr/local/bin/gitleaks
+
 # Android command-line tools, then exactly the platform and build-tools the
 # 5.8 template asks for (compileSdk 36, minSdk 21, targetSdk 34).
 RUN mkdir -p "${ANDROID_HOME}/cmdline-tools" \

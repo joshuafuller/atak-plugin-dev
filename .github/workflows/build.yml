@@ -33,6 +33,8 @@ jobs:
             command -v adb >/dev/null
             command -v gh  >/dev/null
             command -v rg  >/dev/null
+            command -v trivy    >/dev/null
+            command -v gitleaks >/dev/null
             echo "toolchain ok"
           '
 
@@ -57,7 +59,8 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq shellcheck
           shellcheck -S warning workspace/bin/deploy workspace/bin/instrument \
-                                workspace/bin/doctor bin/host-adb-server
+                                workspace/bin/doctor workspace/bin/scan \
+                                bin/host-adb-server
 
       - name: Compose file is valid
         run: |

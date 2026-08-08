@@ -73,7 +73,39 @@ does nothing.
 If the emulator is running and this still fails, the bridge is down.
 Check ADB_BRIDGE_TARGET (currently ${ADB_BRIDGE_TARGET:-unset})."
 fi
-pass "adb sees $(printf '%s\n' "$DEVICES" | grep -c .) device(s): $(echo $DEVICES | tr '\n' ' ')"
+COUNT=$(printf '%s\n' "$DEVICES" | grep -c .)
+pass "adb sees $COUNT device(s)"
+
+# Which device is which, and whether anyone has claimed it. Two agents sharing
+# an emulator has already cost an afternoon here: one force-stopped ATAK for an
+# instrumented run and the other debugged it as a crash in its own work.
+for d in $DEVICES; do
+    AVD=$(adb -s "$d" shell getprop ro.boot.qemu.avd_name 2>/dev/null | tr -d '\r')
+    CLAIM=$(adb -s "$d" shell cat /sdcard/atak/DEVICE_CLAIM.txt 2>/dev/null | tr -d '\r')
+    if [ -n "$CLAIM" ]; then
+        info "$d  ${AVD:-unknown}  [$CLAIM]"
+    else
+        info "$d  ${AVD:-unknown}"
+    fi
+done
+
+if [ "$COUNT" -gt 1 ] && [ -z "${ANDROID_SERIAL:-}" ]; then
+    fail "several devices attached and ANDROID_SERIAL is not set" \
+"Every adb call, and deploy and instrument with it, will pick a device for you
+or refuse outright. Choose yours and pin it:
+
+    export ANDROID_SERIAL=<serial from the list above>
+
+If another agent is using this machine, take the one named for your work and
+leave a claim on it so the next arrival can see it:
+
+    adb shell \"echo 'claimed-by=<who> purpose=<what>' > /sdcard/atak/DEVICE_CLAIM.txt\"
+
+Never force-stop an app on a device you do not own — instrument does that on
+every run, and from the other side it looks like a crash."
+elif [ -n "${ANDROID_SERIAL:-}" ]; then
+    pass "pinned to \$ANDROID_SERIAL=$ANDROID_SERIAL"
+fi
 
 ABI=$(adb shell getprop ro.product.cpu.abi 2>/dev/null | tr -d '\r')
 TAGS=$(adb shell getprop ro.build.tags 2>/dev/null | tr -d '\r')

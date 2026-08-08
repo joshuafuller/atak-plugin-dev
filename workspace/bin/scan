@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+# Check a plugin project for the things that are expensive to find late.
+#
+#   scan <plugin-dir> [--deep]
+#
+# Five checks, cheapest and most consequential first. Each prints a verdict;
+# the run exits non-zero if any FAILED, so it can gate a commit without
+# anybody having to read it.
+#
+#   --deep   also run Android Lint through the project's own gradle. Minutes,
+#            not seconds, so it is opt-in.
+#
+# Written to be worth running unprompted: no configuration, no network for the
+# checks that matter most, and nothing that fails on a clean project.
+
+set -uo pipefail
+
+PROJECT="${1:-}"
+DEEP="${2:-}"
+[ -n "$PROJECT" ] || { echo "usage: scan <plugin-dir> [--deep]" >&2; exit 2; }
+
+DIR="/work/$PROJECT"
+[ -d "$DIR" ] || DIR="$PROJECT"
+[ -d "$DIR" ] || { echo "scan: no such project: $PROJECT" >&2; exit 2; }
+cd "$DIR" || exit 2
+
+FAILED=0
+pass()  { printf '  \033[32mok\033[0m    %s\n' "$1"; }
+warn()  { printf '  \033[33mwarn\033[0m  %s\n' "$1"; }
+fail()  { printf '  \033[31mFAIL\033[0m  %s\n' "$1"; FAILED=1; }
+head2() { printf '\n\033[1m%s\033[0m\n' "$1"; }
+
+printf '\033[1mscan %s\033[0m\n' "$DIR"
+
+# ---------------------------------------------------------------- SDK material
+head2 "ATAK SDK material"
+# History, not just the working tree: a file deleted in a later commit is still
+# published with the repository, and this is the check that catches it.
+BANNED='\.(aar|apk|aab|jar|zip|keystore|so)$|android_keystore|atak-gradle-takdev|atakplugintests|ATAKPluginTests|plugintemplate|(^|/)main\.jar$'
+# The gradle wrapper's own jar is normal and is not SDK material.
+KEEP='gradle/wrapper/gradle-wrapper\.jar'
+
+if [ -d .git ]; then
+    TRACKED=$(git ls-files | grep -iE "$BANNED" | grep -vE "$KEEP" || true)
+    HIST=$(git rev-list --objects --all 2>/dev/null \
+        | git cat-file --batch-check='%(objecttype) %(objectname) %(rest)' 2>/dev/null \
+        | awk '$1=="blob" {$1="";$2="";print substr($0,3)}' \
+        | grep -iE "$BANNED" | grep -vE "$KEEP" | sort -u || true)
+    if [ -n "$TRACKED" ]; then
+        fail "SDK material or a binary is committed:"
+        printf '        %s\n' $TRACKED
+    elif [ -n "$HIST" ]; then
+        fail "SDK material is in history, though not in the working tree:"
+        printf '        %s\n' $HIST
+        echo "        History is what gets published; this needs a rewrite, not a delete."
+    else
+        pass "nothing SDK-derived in the tree or its history"
+    fi
+
+    # The stronger check, when the SDK is actually mounted: compare content.
+    if [ -n "${ATAK_SDK:-}" ] && [ -d "${ATAK_SDK:-}" ]; then
+        SAME=""
+        for f in $(git ls-files); do
+            base=$(basename "$f")
+            m=$(find "$ATAK_SDK" -name "$base" -type f 2>/dev/null | head -1)
+            [ -n "$m" ] && cmp -s "$f" "$m" && SAME="$SAME $f"
+        done
+        if [ -n "$SAME" ]; then
+            fail "files byte-identical to the SDK are committed:"
+            printf '        %s\n' $SAME
+        else
+            pass "no committed file matches an SDK file byte for byte"
+        fi
+    else
+        warn "\$ATAK_SDK not mounted; skipped the byte-for-byte comparison"
+    fi
+else
+    warn "not a git repository; skipped the history checks"
+fi
+
+# ------------------------------------------------------------------- manifest
+head2 "Android manifest"
+MANIFEST=$(find . -path ./build -prune -o -name AndroidManifest.xml -print 2>/dev/null | head -1)
+if [ -z "$MANIFEST" ]; then
+    warn "no AndroidManifest.xml found"
+else
+    grep -q 'com\.atakmap\.app\.component' "$MANIFEST" \
+        && pass "declares com.atakmap.app.component — the plugin is discoverable" \
+        || fail "no com.atakmap.app.component activity: ATAK will not see this plugin, with no error"
+
+    grep -qE 'android:debuggable="true"' "$MANIFEST" \
+        && fail "android:debuggable=\"true\" is set in the manifest" \
+        || pass "not force-debuggable"
+
+    grep -qE 'android:usesCleartextTraffic="true"' "$MANIFEST" \
+        && warn "cleartext traffic is allowed — fine for a loopback tile server, deliberate otherwise" \
+        || pass "no blanket cleartext traffic"
+fi
+
+# ------------------------------------------------------- secrets and licences
+head2 "Secrets, dependencies and licences"
+if command -v trivy >/dev/null 2>&1; then
+    OUT=$(mktemp)
+    # --exit-code 1 is trivy's own contract for "I found something", which is
+    # more reliable than reading its table: the header contains the word
+    # "Secrets" whether or not any were found.
+    #
+    # build/ and .gradle/ are generated and full of third-party jars the
+    # project does not ship; scanning them reports other people's problems.
+    trivy fs --scanners secret,vuln,license --severity HIGH,CRITICAL \
+        --skip-dirs build --skip-dirs '**/build' --skip-dirs .gradle \
+        --no-progress --exit-code 1 --format table . > "$OUT" 2>/dev/null
+    TRIVY=$?
+    if [ "$TRIVY" -eq 0 ]; then
+        pass "no HIGH or CRITICAL secrets, vulnerabilities or licence conflicts"
+    else
+        fail "trivy findings:"
+        sed 's/^/        /' "$OUT" | head -40
+    fi
+    rm -f "$OUT"
+else
+    warn "trivy is not installed; skipped"
+fi
+
+# ------------------------------------------------------------------- gitleaks
+if command -v gitleaks >/dev/null 2>&1 && [ -d .git ]; then
+    # Read the output rather than the exit code: a non-zero exit means either
+    # "leaks found" or "the tool could not run", and reporting a bad flag as a
+    # security finding is worse than not running at all.
+    GL=$(gitleaks detect --no-banner --redact 2>&1)
+    case "$GL" in
+        *"no leaks found"*) pass "gitleaks found no secrets in history" ;;
+        *"leaks found"*)    fail "gitleaks found secrets in history — run: gitleaks detect --redact" ;;
+        *)                  warn "gitleaks could not run: $(printf '%s' "$GL" | head -1)" ;;
+    esac
+fi
+
+# ----------------------------------------------------------------- deep, opt-in
+if [ "$DEEP" = "--deep" ]; then
+    head2 "Android Lint (deep)"
+    if [ -x ./gradlew ]; then
+        if ./gradlew lint --console=plain -q >/dev/null 2>&1; then
+            pass "lint completed; read app/build/reports/lint-results-*.html"
+        else
+            warn "lint reported problems; read app/build/reports/lint-results-*.html"
+        fi
+    else
+        warn "no gradlew here"
+    fi
+fi
+
+head2 "Result"
+if [ "$FAILED" -eq 0 ]; then
+    echo "  Nothing blocking."
+else
+    echo "  Something above needs attention before this is published."
+fi
+exit "$FAILED"

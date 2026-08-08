@@ -92,11 +92,19 @@ tool happens to be there.
 ## The loop
 
 ```bash
+scan <plugin-dir>                    # seconds; run it unprompted
 deploy <plugin-dir>                  # build, install, stage for sideload
 instrument <plugin-dir> [Class#method]   # instrumented tests, bypassing UTP
 ```
 
-Both are on `PATH`. `<plugin-dir>` is a directory under `/work`.
+All on `PATH`. `<plugin-dir>` is a directory under `/work`.
+
+`scan` checks secrets in the tree *and* in history, dependency CVEs, licence
+conflicts, SDK material, and manifest hygiene. It needs no configuration and
+says nothing on a clean project, so there is no reason not to run it before a
+commit. It exits non-zero only on a real failure; a check that cannot run
+reports a warning, never a failure. `docs/SCANNING.md` covers what to install
+when a project needs deeper analysis than the image carries.
 
 **Installing a plugin is not enough to make it visible.** It becomes visible to
 the plugin manager only when a copy is in
@@ -139,9 +147,42 @@ classes differ from the JVM's in ways that fail silently rather than loudly.
 agent its own directory — a separate repo, or a separate `git worktree` — and
 they will not collide. The Gradle cache is shared and locks correctly.
 
-Only one thing is genuinely exclusive: **the device.** Installing, running
-instrumented tests, and driving the UI all contend for it. Serialise device
-work between agents; parallelise everything else.
+**The device is the exception, and it has already caused a real failure here:**
+two agents used the same emulator, one force-stopped ATAK to run instrumented
+tests, and the other spent time debugging what looked like a spontaneous crash
+in its own work. Neither could see the other. `adb devices` reports
+`emulator-5554`, which says nothing about who is using it.
+
+**Name the AVD after the work, not the hardware** — `maproom_atak`, not
+`Pixel_6_API_34` — and pin the port when you start it, so the serial is yours
+by construction:
+
+```bash
+emulator -avd maproom_atak -port 5554 &      # on the HOST
+export ANDROID_SERIAL=emulator-5554           # every adb call honours this
+```
+
+`deploy` and `instrument` respect `ANDROID_SERIAL`, so set it once per agent.
+
+**Ask what a device is before touching it.** Never assume the only one
+attached is yours:
+
+```bash
+for d in $(adb devices | awk 'NR>1 && $2=="device"{print $1}'); do
+  printf '%s %s\n' "$d" "$(adb -s "$d" shell getprop ro.boot.qemu.avd_name | tr -d '\r')"
+done
+```
+
+**Leave a claim where the other agent will look:**
+
+```bash
+adb -s "$ANDROID_SERIAL" shell "echo 'claimed-by=<who> purpose=<what>' \
+    > /sdcard/atak/DEVICE_CLAIM.txt"
+```
+
+**Never `force-stop` an app on a device you do not own.** That single action is
+what turns contention into a phantom bug in someone else's session — and
+`instrument` force-stops ATAK every run.
 
 ## Licence boundary
 
