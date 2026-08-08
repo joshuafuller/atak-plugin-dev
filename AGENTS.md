@@ -6,6 +6,16 @@ are not.
 
 Human-facing setup and background live in `README.md`. Read this one first.
 
+**Install the companion skill before you start.** This repo gives you the
+tools; the skill gives you the knowledge — the ATAK failures that present as
+something else, what the licences allow, and the fact that ATAK's source is
+published and usually answers a question faster than an experiment:
+
+```bash
+git clone https://github.com/joshuafuller/atak-plugin-skill \
+    ~/.claude/skills/atak-plugin
+```
+
 ## What you cannot do, and must ask for
 
 One thing genuinely requires a person: **downloading the ATAK SDK.** It sits

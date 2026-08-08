@@ -79,6 +79,18 @@ build, install, load, drive the UI, run tests, read the result — is designed t
 run without a human. Downloading the SDK is the one step that cannot be
 automated: it is behind a click-through licence.
 
+Pair it with the
+**[atak-plugin skill](https://github.com/joshuafuller/atak-plugin-skill)**.
+The split is deliberate: **this repo carries the tools, the skill carries the
+knowledge** — which ATAK failures look like something else, what the licences
+permit, and where ATAK's own source answers the question faster than an
+experiment will.
+
+```bash
+git clone https://github.com/joshuafuller/atak-plugin-skill \
+    ~/.claude/skills/atak-plugin
+```
+
 ## Documentation
 
 | | |
@@ -89,9 +101,6 @@ automated: it is behind a click-through licence.
 | [docs/SHIPPING.md](docs/SHIPPING.md) | Getting a signed APK through TAK's Third Party Pipeline |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Symptom-to-cause table |
 | [AGENTS.md](AGENTS.md) | Running the whole loop unattended |
-
-There is also a [Claude skill](https://github.com/joshuafuller/atak-plugin-skill)
-carrying the same measured facts, for agent-assisted work.
 
 ## Licence and attribution
 
