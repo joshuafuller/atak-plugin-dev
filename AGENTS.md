@@ -92,11 +92,19 @@ tool happens to be there.
 ## The loop
 
 ```bash
+scan <plugin-dir>                    # seconds; run it unprompted
 deploy <plugin-dir>                  # build, install, stage for sideload
 instrument <plugin-dir> [Class#method]   # instrumented tests, bypassing UTP
 ```
 
-Both are on `PATH`. `<plugin-dir>` is a directory under `/work`.
+All on `PATH`. `<plugin-dir>` is a directory under `/work`.
+
+`scan` checks secrets in the tree *and* in history, dependency CVEs, licence
+conflicts, SDK material, and manifest hygiene. It needs no configuration and
+says nothing on a clean project, so there is no reason not to run it before a
+commit. It exits non-zero only on a real failure; a check that cannot run
+reports a warning, never a failure. `docs/SCANNING.md` covers what to install
+when a project needs deeper analysis than the image carries.
 
 **Installing a plugin is not enough to make it visible.** It becomes visible to
 the plugin manager only when a copy is in

@@ -30,6 +30,9 @@ each one and tells you what to do about the first that is wrong.
 - **`deploy`** — build, install, and stage for sideload in one command.
 - **`instrument`** — instrumented tests inside ATAK, avoiding the Gradle test
   platform that cannot reach a forwarded adb socket.
+- **`scan`** — secrets (tree *and* history), dependency CVEs, licence
+  conflicts, SDK material, manifest hygiene. Seconds, no configuration. See
+  [docs/SCANNING.md](docs/SCANNING.md).
 - **Multi-project by default** — every plugin repo side by side, so several
   people or agents can work at once without sharing a checkout.
 
@@ -99,6 +102,7 @@ git clone https://github.com/joshuafuller/atak-plugin-skill \
 | [docs/WORKFLOW.md](docs/WORKFLOW.md) | Scaffolding a plugin, renaming the template, the build-load loop, testing and debugging |
 | [docs/SIGNING.md](docs/SIGNING.md) | The signing gate, and what the developer build changes |
 | [docs/SHIPPING.md](docs/SHIPPING.md) | Getting a signed APK through TAK's Third Party Pipeline |
+| [docs/SCANNING.md](docs/SCANNING.md) | What `scan` checks, and what to install when a project needs more |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Symptom-to-cause table |
 | [AGENTS.md](AGENTS.md) | Running the whole loop unattended |
 
