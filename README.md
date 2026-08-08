@@ -9,6 +9,34 @@ a JDK, Android SDK components or Gradle on your machine.
 
 Measured against **ATAK-CIV 5.8.0.1** on an Android 14 emulator.
 
+## Start here
+
+**New to ATAK plugins? → [docs/FIRST-PLUGIN.md](docs/FIRST-PLUGIN.md).** From
+nothing to a plugin running inside ATAK, in about an hour. Every command is
+labelled HOST or CONTAINER, with what you should see at each step.
+
+**An AI agent? → [AGENTS.md](AGENTS.md)**, plus the
+[companion skill](https://github.com/joshuafuller/atak-plugin-skill). Every
+step but one runs unattended.
+
+**Set up already?**
+
+```bash
+docker compose exec atak-dev doctor            # always first
+docker compose exec atak-dev deploy MyPlugin
+```
+
+## What an ATAK plugin is
+
+ATAK is a mapping application used by search and rescue, fire, law enforcement
+and military teams. A plugin is a separate Android APK that ATAK loads **into
+its own process** at runtime. It has no activity of its own, and you never
+launch it directly.
+
+That explains most of what looks strange here: tests run inside ATAK, ATAK
+checks who signed your plugin before loading it, and the SDK is licensed so you
+fetch it yourself.
+
 ## Why
 
 Getting a first ATAK plugin to load is mostly not a coding problem. It is a
@@ -41,8 +69,14 @@ own from [tak.gov](https://tak.gov) and mount it. See [NOTICE.md](NOTICE.md).
 
 ## Requirements
 
-Docker with Compose, an Android emulator or device on the host, and the ATAK
-CIV SDK.
+On the **host**: Docker with Compose, Android **platform-tools** (`adb`) and
+the **emulator** with `cmdline-tools`, and the **ATAK CIV SDK** from
+[tak.gov](https://tak.gov). Roughly 20 GB of disk.
+
+The ATAK SDK is the only thing that cannot be automated — it is behind a
+click-through licence.
+[docs/FIRST-PLUGIN.md](docs/FIRST-PLUGIN.md) walks through installing the
+Android tools and creating an emulator if you do not have them.
 
 The build pulls a published base image
 (`ghcr.io/joshuafuller/atak-plugin-dev-base`) and adds the Android SDK locally.
@@ -55,27 +89,26 @@ docker build -f Dockerfile.base -t atak-plugin-dev-base:local .
 BASE=atak-plugin-dev-base:local docker compose build
 ```
 
-## Start
+## The short version
+
+Assumes you already have an emulator and the SDK; if not, use
+[docs/FIRST-PLUGIN.md](docs/FIRST-PLUGIN.md).
 
 ```bash
+# HOST
 git clone https://github.com/joshuafuller/atak-plugin-dev
 cd atak-plugin-dev
 cp .env.example .env
 $EDITOR .env                       # ATAK_SDK_DIR and PLUGINS_DIR
 
-./bin/host-adb-server &            # on the HOST, leave running
+./bin/host-adb-server &            # leave running
 docker compose up -d --build       # first build pulls ~2 GB
 
 docker compose exec atak-dev doctor
-```
-
-`doctor` passing means the environment is sound. Then:
-
-```bash
 docker compose exec atak-dev deploy <plugin-dir>
 ```
 
-and on the device: **Tools → Plugins → sync → tap the row → Load**.
+Then on the device: **Tools → Plugins → sync → tap the row → Load**.
 
 ## The one thing to know before you start
 
@@ -109,6 +142,7 @@ git clone https://github.com/joshuafuller/atak-plugin-skill \
 
 | | |
 | --- | --- |
+| [docs/FIRST-PLUGIN.md](docs/FIRST-PLUGIN.md) | **Start here.** Nothing to a running plugin, end to end |
 | [docs/SETUP.md](docs/SETUP.md) | Configuration, how adb reaches the host, what to do when `adb devices` is empty |
 | [docs/WORKFLOW.md](docs/WORKFLOW.md) | Scaffolding a plugin, renaming the template, the build-load loop, testing and debugging |
 | [docs/SIGNING.md](docs/SIGNING.md) | The signing gate, and what the developer build changes |
