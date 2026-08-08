@@ -52,13 +52,21 @@ jobs:
           # Moving tags must never go backwards. Retrying an old release after
           # a newer one exists would otherwise point :latest at the older
           # image.
-          NEWEST=$(gh release list --repo "$GITHUB_REPOSITORY" --limit 1 \
-              --json tagName -q '.[0].tagName' 2>/dev/null || true)
-          if [ "v$V" = "$NEWEST" ] || [ -z "$NEWEST" ]; then
-            echo "moving=true"  >> "$GITHUB_OUTPUT"
+          # Fail closed. If the lookup does not work we do not know whether
+          # this is the newest release, and moving :latest on a guess is the
+          # exact failure this check exists to prevent. Publishing the precise
+          # version is always safe.
+          if NEWEST=$(gh release list --repo "$GITHUB_REPOSITORY" --limit 1 \
+                        --json tagName -q '.[0].tagName') && [ -n "$NEWEST" ]; then
+            if [ "v$V" = "$NEWEST" ]; then
+              echo "moving=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "moving=false" >> "$GITHUB_OUTPUT"
+              echo "::notice::v$V is not the newest release ($NEWEST); publishing the exact version only"
+            fi
           else
             echo "moving=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::v$V is not the newest tag ($NEWEST); publishing the exact version only"
+            echo "::warning::could not determine the newest release; publishing the exact version only"
           fi
 
       - uses: actions/checkout@v4
