@@ -40,12 +40,29 @@ against the common mistake, not a guarantee. The reliable check is comparing
 your tree against the SDK, which [docs/WORKFLOW.md](docs/WORKFLOW.md) shows how
 to do.
 
-## Third-party components the image installs
+## What is published, and what is not
 
-None of these are redistributed by this repository — the image is built on your
-machine, and we publish no image. They are listed so you know what you are
-running, and because **if you publish a built image, their obligations become
-yours.**
+One image is published: **`ghcr.io/joshuafuller/atak-plugin-dev-base`**. It
+carries the JDK, Gradle, the scanners and the shell tooling — everything below
+that is freely redistributable.
+
+**The Android SDK is deliberately not in it.** Google's Android SDK Terms,
+clause 3.4:
+
+> Except to the extent required by applicable third party licenses, you may not
+> copy (except for backup purposes), modify, adapt, **redistribute**,
+> decompile, reverse engineer, disassemble, or create derivative works of the
+> SDK or any part of the SDK.
+
+Publishing an image containing it would be redistribution. Plenty of public
+Android CI images do exactly that; it is still what the terms say. So the final
+stage installs the Android SDK **on your machine**, under your own acceptance
+of those terms — which is also why the build runs `yes | sdkmanager
+--licenses`.
+
+The ATAK SDK is in neither image: licensed material, mounted at runtime.
+
+## Third-party components
 
 | Component | Licence |
 | --- | --- |
@@ -59,11 +76,11 @@ yours.**
 | Ubuntu base packages (git, curl, jq, python3, vim, and the rest) | various, per Debian/Ubuntu packaging |
 | shellcheck (CI only) | GPL-3.0 |
 
-### The image accepts the Android SDK licence on your behalf
+### The build accepts the Android SDK licence on your behalf
 
-The Dockerfile runs `yes | sdkmanager --licenses`. That is an automated
-acceptance of Google's Android SDK terms, made when you build the image. If you
-are not in a position to accept those terms, do not build it.
+`Dockerfile` runs `yes | sdkmanager --licenses`. That is an automated
+acceptance of Google's Android SDK terms, made on your machine when you build.
+If you are not in a position to accept those terms, do not build it.
 
 ## Documentation
 

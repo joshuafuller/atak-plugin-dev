@@ -10,7 +10,14 @@
 
 services:
   atak-dev:
-    build: .
+    build:
+      context: .
+      args:
+        # Pulls the published base by default. To build the base yourself —
+        # offline, or when changing it:
+        #   docker build -f Dockerfile.base -t atak-plugin-dev-base:local .
+        #   BASE=atak-plugin-dev-base:local docker compose build
+        BASE: ${BASE:-ghcr.io/joshuafuller/atak-plugin-dev-base:latest}
     container_name: atak-dev
     network_mode: host
     working_dir: /work

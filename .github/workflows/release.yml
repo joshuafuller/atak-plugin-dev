@@ -1,0 +1,82 @@
+# Semantic versioning and releases, and the one image we are allowed to ship.
+#
+# release-please reads Conventional Commits since the last tag, keeps
+# CHANGELOG.md and the version file, and opens a release PR. Merging that PR
+# tags the release, which is what triggers publishing.
+#
+# Only the *base* image is published. It carries the JDK, Gradle, the scanners
+# and the shell tooling — all freely redistributable. The Android SDK is added
+# by the final stage on the user's own machine, because Google's Android SDK
+# Terms 3.4 forbid redistributing it. See NOTICE.md.
+name: release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # create the release PR, tag, and release
+      pull-requests: write
+    outputs:
+      released: ${{ steps.release.outputs.release_created }}
+      tag: ${{ steps.release.outputs.tag_name }}
+      major: ${{ steps.release.outputs.major }}
+      minor: ${{ steps.release.outputs.minor }}
+      patch: ${{ steps.release.outputs.patch }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          release-type: simple
+
+  base-image:
+    needs: please
+    if: needs.please.outputs.released == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write        # push to GHCR
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push the base image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.base
+          push: true
+          # Moving tags for people who want them, and an immutable one for
+          # people who need a build to still work next year.
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/atak-plugin-dev-base:${{ needs.please.outputs.major }}.${{ needs.please.outputs.minor }}.${{ needs.please.outputs.patch }}
+            ghcr.io/${{ github.repository_owner }}/atak-plugin-dev-base:${{ needs.please.outputs.major }}.${{ needs.please.outputs.minor }}
+            ghcr.io/${{ github.repository_owner }}/atak-plugin-dev-base:${{ needs.please.outputs.major }}
+            ghcr.io/${{ github.repository_owner }}/atak-plugin-dev-base:latest
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.version=${{ needs.please.outputs.tag }}
+            org.opencontainers.image.licenses=MIT
+            org.opencontainers.image.description=Base layer for the ATAK plugin dev container. Contains no Android SDK and no ATAK SDK.
+          provenance: true
+          sbom: true
+
+      - name: Scan the published image
+        # After push, not before: a vulnerable base is worth knowing about even
+        # once it is out, and failing here would not un-publish it.
+        env:
+          IMAGE: ghcr.io/${{ github.repository_owner }}/atak-plugin-dev-base:${{ needs.please.outputs.major }}.${{ needs.please.outputs.minor }}.${{ needs.please.outputs.patch }}
+        run: |
+          docker run --rm aquasec/trivy:latest image \
+            --severity HIGH,CRITICAL --no-progress --exit-code 0 "$IMAGE"
