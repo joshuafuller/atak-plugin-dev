@@ -194,6 +194,26 @@ adb -s "$ANDROID_SERIAL" shell "echo 'claimed-by=<who> purpose=<what>' \
 what turns contention into a phantom bug in someone else's session — and
 `instrument` force-stops ATAK every run.
 
+## Commit messages drive the release
+
+Versioning is automatic and comes from your commit subjects, so they are not
+free text. Use [Conventional Commits](https://www.conventionalcommits.org):
+
+| Prefix | Effect on the version |
+| --- | --- |
+| `fix:` | patch — 0.1.0 to 0.1.1 |
+| `feat:` | minor — 0.1.0 to 0.2.0 |
+| `feat!:` or a `BREAKING CHANGE:` footer | major |
+| `docs:`, `chore:`, `test:`, `refactor:`, `ci:` | no release |
+
+`release-please` reads everything since the last tag, keeps `CHANGELOG.md` and
+`version.txt`, and opens a release PR. Merging that PR tags the release, which
+publishes the base image to GHCR. Nothing is released by pushing to `main`
+alone.
+
+Write the body as prose — what changed and why, and the measurement if there
+was one. Only the subject line is machine-read.
+
 ## Licence boundary
 
 The SDK is mounted, never copied. Do not commit anything from `$ATAK_SDK` into

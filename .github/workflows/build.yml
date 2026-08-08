@@ -17,10 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build the image
-        # No SDK is needed: it is licensed material, mounted at runtime rather
-        # than baked in, so the image builds without it.
-        run: docker build -t atak-plugin-dev:ci .
+      - name: Build the base image
+        # Freely redistributable layers only; this is what gets published.
+        run: docker build -f Dockerfile.base -t atak-plugin-dev-base:ci .
+
+      - name: Build the full image on top of it
+        # Adds the Android SDK, which is never published. No ATAK SDK is
+        # needed: it is licensed material, mounted at runtime.
+        run: docker build --build-arg BASE=atak-plugin-dev-base:ci -t atak-plugin-dev:ci .
 
       - name: The toolchain is what the README claims
         run: |

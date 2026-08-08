@@ -44,6 +44,17 @@ own from [tak.gov](https://tak.gov) and mount it. See [NOTICE.md](NOTICE.md).
 Docker with Compose, an Android emulator or device on the host, and the ATAK
 CIV SDK.
 
+The build pulls a published base image
+(`ghcr.io/joshuafuller/atak-plugin-dev-base`) and adds the Android SDK locally.
+That split is deliberate: Google's terms forbid redistributing the Android SDK,
+so it is installed on your machine under your own acceptance rather than shipped
+in a shared image. See [NOTICE.md](NOTICE.md). To build the base yourself:
+
+```bash
+docker build -f Dockerfile.base -t atak-plugin-dev-base:local .
+BASE=atak-plugin-dev-base:local docker compose build
+```
+
 ## Start
 
 ```bash
