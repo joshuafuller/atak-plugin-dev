@@ -31,12 +31,14 @@ repository:
 Get the SDK yourself from <https://tak.gov>. It is free of charge and requires
 accepting the licence.
 
-CI helps, but does not prove this. The workflow rejects committed binaries and
-archives (`.aar`, `.apk`, `.jar`, `.zip`, `.aab`, `.keystore`, `.so`) and a
-list of known SDK filenames. It cannot recognise an SDK text file that has been
-renamed, so it is a backstop against the common mistake, not a guarantee. The
-reliable check is comparing your tree against the SDK, which
-[docs/WORKFLOW.md](docs/WORKFLOW.md) shows how to do.
+CI helps, but does not prove this. The workflow rejects binaries and archives
+(`.aar`, `.apk`, `.jar`, `.zip`, `.aab`, `.keystore`, `.so`) and a list of
+known SDK filenames — **in history as well as in the working tree**, because
+deleting a file in a later commit does not remove it from what gets published.
+It cannot recognise an SDK text file that has been renamed, so it is a backstop
+against the common mistake, not a guarantee. The reliable check is comparing
+your tree against the SDK, which [docs/WORKFLOW.md](docs/WORKFLOW.md) shows how
+to do.
 
 ## Third-party components the image installs
 

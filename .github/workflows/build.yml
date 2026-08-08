@@ -66,15 +66,34 @@ jobs:
             docker compose config >/dev/null
           echo "compose ok"
 
-      - name: No ATAK SDK material committed
+      - name: No ATAK SDK material, in the working tree or in history
         run: |
-          # A backstop against the common mistake, not a proof. It cannot
-          # recognise an SDK text file that has been renamed; NOTICE.md says so
-          # rather than claiming more than this does.
-          banned='\.(aar|apk|aab|jar|zip|keystore|so)$|android_keystore|atak-gradle-takdev|atakplugintests|ATAKPluginTests|plugintemplate|^main\.jar$'
+          # Checking only the working tree is what let an SDK archive sit in
+          # this repository's published history for a day: it had been deleted
+          # in a later commit, so `git ls-files` was clean while the blob was
+          # still fetchable from the public remote. History is what gets
+          # published, so history is what gets checked.
+          #
+          # Still a backstop, not a proof: it cannot recognise an SDK text file
+          # that has been renamed. NOTICE.md says so rather than claiming more.
+          banned='\.(aar|apk|aab|jar|zip|keystore|so)$|android_keystore|atak-gradle-takdev|atakplugintests|ATAKPluginTests|plugintemplate|(^|/)main\.jar$'
+
           if git ls-files | grep -qiE "$banned"; then
-            echo "::error::SDK material or a binary artifact is committed"
+            echo "::error::SDK material or a binary artifact is in the working tree"
             git ls-files | grep -iE "$banned"
             exit 1
           fi
-          echo "clean"
+
+          # Every path that has ever existed on any ref.
+          if git rev-list --objects --all \
+             | git cat-file --batch-check='%(objecttype) %(objectname) %(rest)' \
+             | awk '$1=="blob" {$1=""; $2=""; print substr($0,3)}' \
+             | grep -qiE "$banned"; then
+            echo "::error::SDK material exists in history, even if deleted since"
+            git rev-list --objects --all \
+              | git cat-file --batch-check='%(objecttype) %(objectname) %(rest)' \
+              | awk '$1=="blob" {$1=""; $2=""; print substr($0,3)}' \
+              | grep -iE "$banned" | sort -u
+            exit 1
+          fi
+          echo "clean, working tree and history"
