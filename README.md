@@ -67,7 +67,7 @@ docker compose up -d --build      # first build pulls ~2 GB of Android SDK
 | --- | --- |
 | `ATAK_SDK_DIR` | Folder that directly contains `atak.apk`, `android_keystore`, `atak-gradle-takdev.jar`. Mounted **writable** — the takdev gradle plugin writes `mapping.txt` into it. |
 | `ANDROID_USER_HOME` | Your `~/.android`, so the emulator does not re-prompt to authorise adb. |
-| `ADB_SERVER_SOCKET` | How the container reaches the host adb server. |
+| `ADB_BRIDGE_TARGET` | Where the host's adb server is, for the port bridge. Defaults to `host.docker.internal:5037`. |
 
 ### adb
 
@@ -87,9 +87,17 @@ docker compose exec atak-dev bash
 adb devices                  # should list your emulator
 ```
 
-If it does not: on native Linux Docker with `network_mode: host`,
-`host.docker.internal` may not resolve even with the `extra_hosts` mapping.
-Set `ADB_SERVER_SOCKET=tcp:127.0.0.1:5037` in `.env` and recreate the container.
+The container forwards its own `127.0.0.1:5037` to that host server
+(`workspace/bin/adb-bridge`, started automatically). `ADB_SERVER_SOCKET` is
+deliberately **not** set, and setting it will cost you ten minutes per test
+run: Gradle's device monitor ignores it, runs `adb start-server`, fails to bind
+an address the container does not own, and then retries. The symptom is
+`connectedAndroidTest` producing no output at all, and eventually
+`[DeviceMonitor]: Cannot reach ADB server`.
+
+If `adb devices` is empty: on native Linux Docker with `network_mode: host`,
+`host.docker.internal` may not resolve even with the `extra_hosts` mapping. Set
+`ADB_BRIDGE_TARGET=127.0.0.1:5037` in `.env` and recreate the container.
 
 ---
 
@@ -188,13 +196,36 @@ gets them rendering in ATAK.
 that does not touch the Android or ATAK API. They run in seconds.
 
 For anything that does, the SDK ships an Espresso framework. Copy `espresso/`
-from the SDK so it sits beside `app/`, derive test classes from
-`ATAKTestClass`, and call `helper.installPlugin("Your Plugin Name")` plus
-`ClassLoaderReplacer.fixClassLoaderForClass(...)` in a `@BeforeClass` — plugins
-run inside ATAK's process, so without the classloader fix you get
-`ClassDefNotFoundException` on your own classes. Run with
-`./gradlew connectedCivDebugAndroidTest`. Both the plugin and the developer
-ATAK APK must be installed first.
+from the SDK so it sits beside `app/`, then **rename
+`ATAKPluginTests-debug.aar` to `atakplugintests-debug.aar`** — `testSetup.gradle`
+resolves the lowercase name, and the flatDir lookup is case-sensitive on Linux.
+
+Do **not** add `apply from: espresso/testSetup.gradle`. The takdev plugin
+applies it as soon as the directory exists; a second apply fails the build with
+`Cannot add task 'clearScreenshots' as a task with that name already exists`.
+
+Derive test classes from `ATAKTestClass`, and in a `@BeforeClass` call
+`helper.installPlugin("Your Plugin Name")` and
+`ClassLoaderReplacer.fixClassLoaderForClass(...)` — plugins run inside ATAK's
+process, so without the classloader fix you get `ClassDefNotFoundException` on
+your own classes.
+
+Run them with:
+
+```bash
+/work/bin/instrument MyPlugin
+```
+
+Not `./gradlew connectedCivDebugAndroidTest`. Gradle's Unified Test Platform
+fails against the forwarded adb socket with `Failed to initialize
+AndroidDebugBridge`. `instrument` does the parts that matter — assemble, the
+`_modApk` step, install — and then drives the instrumentation over adb.
+
+That `_modApk` step is easy to miss if you roll your own: `assembleAndroidTest`
+does **not** run it, only `connectedAndroidTest` depends on it. It rewrites the
+instrumentation manifest's `targetPackage` to `com.atakmap.app.civ` and
+re-signs, which is what puts your tests inside ATAK's process. Without it every
+test dies at startup with `NoClassDefFoundError` on ATAK's own classes.
 
 Turn off animations or Espresso will be flaky:
 
@@ -261,6 +292,11 @@ or set `ndk.dir` if you need JNI.
 | `will NOT load` but no signature error | Detected but not enabled — sync, tap the row, **Load**. |
 | Plugin not listed at all after install | Not staged in `/sdcard/atak/support/apks/sideloaded/`, or you have not synced. |
 | `adb devices` empty in the container | Host adb server not started with `-a` (`./bin/host-adb-server`), or `host.docker.internal` does not resolve. |
+| `connectedAndroidTest` produces nothing for minutes | Gradle's device monitor cannot reach adb. Use `/work/bin/instrument`; never set `ADB_SERVER_SOCKET`. |
+| `Failed to initialize AndroidDebugBridge` | Gradle's Unified Test Platform against the forwarded socket. Use `/work/bin/instrument`. |
+| Instrumented tests die on `NoClassDefFoundError` for ATAK classes | The `_modApk` task did not run, so the tests target your plugin instead of ATAK. |
+| `Cannot add task 'clearScreenshots'` | `espresso/testSetup.gradle` applied twice — takdev already applies it. |
+| Every XML document fails to parse on device but not in unit tests | Android's parser rejects `disallow-doctype-decl`. See the `atak-plugin` skill, `references/android-gotchas.md`. |
 | `mapping.txt (Read-only file system)` | SDK mount is read-only; takdev writes into it. Drop any `:ro`. |
 | Gradle fails offline | The gradle *distribution* is pre-seeded, dependencies are not. The first build needs network. |
 | First launch demands an encryption passphrase | Left over from a previous install. **Remove and Quit**, confirm, relaunch. |
@@ -277,4 +313,6 @@ Dockerfile            the image
 bin/host-adb-server   run on the HOST before using adb in the container
 workspace/            mounted at /work — your plugin projects live here
 workspace/bin/deploy  build + install + stage, run inside the container
+workspace/bin/instrument  run instrumented tests inside ATAK
+workspace/bin/adb-bridge  forwards 127.0.0.1:5037 to the host, started automatically
 ```
