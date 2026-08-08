@@ -74,7 +74,7 @@ does nothing.
 If the emulator is running and this still fails, the bridge is down.
 Check ADB_BRIDGE_TARGET (currently ${ADB_BRIDGE_TARGET:-unset})."
 fi
-pass "adb sees $(printf '%s' "$DEVICES" | wc -l | tr -d ' ') device(s): $(echo $DEVICES | tr '\n' ' ')"
+pass "adb sees $(printf '%s\n' "$DEVICES" | grep -c .) device(s): $(echo $DEVICES | tr '\n' ' ')"
 
 ABI=$(adb shell getprop ro.product.cpu.abi 2>/dev/null | tr -d '\r')
 TAGS=$(adb shell getprop ro.build.tags 2>/dev/null | tr -d '\r')
