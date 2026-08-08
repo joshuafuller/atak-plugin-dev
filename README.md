@@ -8,6 +8,17 @@ gets it loaded into ATAK.
 The ATAK SDK itself is **not** in the image. It is licensed material; you
 download your own from [tak.gov](https://tak.gov) and mount it.
 
+**Working with an AI agent?** Point it at [AGENTS.md](AGENTS.md). The container
+is built so that everything after the SDK download — build, install, load,
+drive the UI, run tests, read the result — can be done without a human in the
+loop. Downloading the SDK is the one step that cannot: it is behind a
+click-through licence.
+
+**First command, always:** `docker compose exec atak-dev doctor`. It checks the
+SDK layout, the toolchain, the adb bridge, the emulator image, and whether the
+ATAK on the device will actually accept your plugin — and tells you what to do
+about the first thing that is wrong.
+
 ---
 
 ## Read this first: the signing gate
@@ -124,7 +135,7 @@ takdev.plugin=/opt/atak-sdk/atak-gradle-takdev.jar
 Then, from inside the container:
 
 ```bash
-/work/bin/deploy MyPlugin
+deploy MyPlugin
 ```
 
 That assembles `CivDebug`, installs the APK, and stages a copy in
@@ -177,18 +188,29 @@ the sideload folder, or Sync Packages will show a phantom second product.
 
 ## Where plugins live
 
-Each plugin is its own repository, cloned into `workspace/` — which is mounted
-at `/work` and is otherwise ignored by this repo. Nothing under `workspace/`
-belongs to the container except `workspace/bin`.
+Each plugin is its own repository. `PLUGINS_DIR` in `.env` points at the
+folder that holds them all, and that folder is mounted at `/work`.
 
-```bash
-git clone <your-plugin-repo> workspace/MyPlugin
-docker compose exec atak-dev /work/bin/deploy MyPlugin
+```
+PLUGINS_DIR=/home/you/development/tak
+                    |
+                    +-- atak-plugin-maproom      ->  /work/atak-plugin-maproom
+                    +-- atak-plugin-weather      ->  /work/atak-plugin-weather
+                    +-- my-plugin.worktrees/fix  ->  /work/my-plugin.worktrees/fix
 ```
 
-A worked example, built with this container:
-[Map Room](workspace/MapRoom) — installs a catalogue of map sources and
-gets them rendering in ATAK.
+Pointing at the parent rather than at one project is deliberate: several
+people — or several agents — can then work on different plugins, or different
+`git worktree`s of the same plugin, at once, each in its own directory, with
+nothing shared but the Gradle cache, which locks correctly.
+
+```bash
+git clone <your-plugin-repo>
+docker compose exec atak-dev deploy <plugin-dir>
+```
+
+The container's own helper scripts live in `workspace/bin`, are mounted
+read-only at `/opt/tak-bin`, and are on `PATH`.
 
 ## Testing
 
@@ -213,7 +235,7 @@ your own classes.
 Run them with:
 
 ```bash
-/work/bin/instrument MyPlugin
+instrument MyPlugin
 ```
 
 Not `./gradlew connectedCivDebugAndroidTest`. Gradle's Unified Test Platform
@@ -292,8 +314,8 @@ or set `ndk.dir` if you need JNI.
 | `will NOT load` but no signature error | Detected but not enabled — sync, tap the row, **Load**. |
 | Plugin not listed at all after install | Not staged in `/sdcard/atak/support/apks/sideloaded/`, or you have not synced. |
 | `adb devices` empty in the container | Host adb server not started with `-a` (`./bin/host-adb-server`), or `host.docker.internal` does not resolve. |
-| `connectedAndroidTest` produces nothing for minutes | Gradle's device monitor cannot reach adb. Use `/work/bin/instrument`; never set `ADB_SERVER_SOCKET`. |
-| `Failed to initialize AndroidDebugBridge` | Gradle's Unified Test Platform against the forwarded socket. Use `/work/bin/instrument`. |
+| `connectedAndroidTest` produces nothing for minutes | Gradle's device monitor cannot reach adb. Use `instrument`; never set `ADB_SERVER_SOCKET`. |
+| `Failed to initialize AndroidDebugBridge` | Gradle's Unified Test Platform against the forwarded socket. Use `instrument`. |
 | Instrumented tests die on `NoClassDefFoundError` for ATAK classes | The `_modApk` task did not run, so the tests target your plugin instead of ATAK. |
 | Instrumented runs produce no output at all, `adb` exits 255 | A quiet adb connection was torn down. If you wrote your own port forwarder, clear the connect timeout after connecting — it otherwise applies to every read. |
 | `adb install` fails with an empty message, or `Failure calling service package: Broken pipe` | The emulator's package service is wedged after many install cycles. `adb reboot`. |
@@ -310,11 +332,13 @@ or set `ndk.dir` if you need JNI.
 
 ```
 .env.example          machine layout, copy to .env
+AGENTS.md             how an agent runs all of this without a human
 compose.yaml          the dev service
 Dockerfile            the image
 bin/host-adb-server   run on the HOST before using adb in the container
-workspace/            mounted at /work — your plugin projects live here
-workspace/bin/deploy  build + install + stage, run inside the container
-workspace/bin/instrument  run instrumented tests inside ATAK
-workspace/bin/adb-bridge  forwards 127.0.0.1:5037 to the host, started automatically
+workspace/bin/        mounted read-only at /opt/tak-bin, on PATH
+  doctor              check every assumption, in the order they break
+  deploy              build + install + stage for sideload
+  instrument          run instrumented tests inside ATAK
+  adb-bridge          forwards 127.0.0.1:5037 to the host, started automatically
 ```

@@ -1,6 +1,6 @@
 # ATAK plugin dev box.
 #
-#   cp .env.example .env      # point ATAK_SDK_DIR at your unzipped SDK
+#   cp .env.example .env      # point ATAK_SDK_DIR and PLUGINS_DIR at yours
 #   docker compose up -d --build
 #   docker compose exec atak-dev bash
 #
@@ -23,12 +23,20 @@ services:
       - "host.docker.internal:host-gateway"
 
     volumes:
-      # The plugin source we are actually working on.
-      - ./workspace:/work
+      # Every plugin repository, side by side. This is a directory of sibling
+      # repos rather than one project so that several agents can work on
+      # different plugins — or different git worktrees of one plugin — at the
+      # same time, each in its own directory, without a shared checkout to
+      # fight over.
+      - ${PLUGINS_DIR:?set PLUGINS_DIR in .env}:/work
+      # The helper scripts belong to this repo, not to any plugin, so they are
+      # mounted separately and put on PATH by the image.
+      - ./workspace/bin:/opt/tak-bin:ro
       # ATAK SDK — licensed material, mounted rather than baked in. Writable:
       # the takdev gradle plugin writes mapping.txt into it during the build.
       - ${ATAK_SDK_DIR:?set ATAK_SDK_DIR in .env}:/opt/atak-sdk
-      # Persist the gradle cache across container rebuilds.
+      # Persist the gradle cache across container rebuilds. Shared by every
+      # plugin; Gradle locks it correctly for concurrent builds.
       - gradle-cache:/home/dev/.gradle
       # Reuse the host's adb keys so the emulator does not re-prompt.
       - ${ANDROID_USER_HOME:-${HOME}/.android}:/home/dev/.android
@@ -40,9 +48,22 @@ services:
       # because Gradle's device monitor ignores it, runs `adb start-server`,
       # and then hangs when that cannot bind the address.
       ADB_BRIDGE_TARGET: ${ADB_BRIDGE_TARGET:-host.docker.internal:5037}
+      # Agents run non-interactively: never open an editor or a pager, and
+      # never colour output that is about to be parsed.
+      GIT_PAGER: cat
+      PAGER: cat
+      EDITOR: "true"
+      GIT_TERMINAL_PROMPT: "0"
+      DEBIAN_FRONTEND: noninteractive
+      # Gradle in a container with no TTY. Plain output is far easier for an
+      # agent to read than progress bars redrawn with escape codes.
+      GRADLE_OPTS: "-Dorg.gradle.console=plain -Dorg.gradle.daemon=false"
+      # Passed through when present so an agent inside the container can use
+      # gh without a second login.
+      GH_TOKEN: ${GH_TOKEN:-}
 
     # Forward the adb port for the container's lifetime, then idle.
-    command: ["bash", "-lc", "/work/bin/adb-bridge & exec sleep infinity"]
+    command: ["bash", "-lc", "/opt/tak-bin/adb-bridge & exec sleep infinity"]
 
     stdin_open: true
     tty: true

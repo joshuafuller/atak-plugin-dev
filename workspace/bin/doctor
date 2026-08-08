@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+# Check every assumption this container makes, in the order they break.
+#
+#   doctor
+#
+# Written for an agent: each check prints one line, the first genuine problem
+# stops the run with a non-zero exit and a specific instruction. "Probably
+# fine" is not a result — a check either passes or tells you what to do.
+
+set -uo pipefail
+
+PASS=0
+pass() { printf '  ok    %s\n' "$1"; }
+info() { printf '  --    %s\n' "$1"; }
+fail() {
+    printf '  FAIL  %s\n' "$1"
+    printf '\n%s\n' "$2"
+    exit 1
+}
+section() { printf '\n%s\n' "$1"; }
+
+section "ATAK SDK"
+
+SDK="${ATAK_SDK:-/opt/atak-sdk}"
+[ -d "$SDK" ] || fail "no SDK mounted at $SDK" \
+"Set ATAK_SDK_DIR in .env to the folder you unzipped the ATAK CIV SDK into,
+then: docker compose up -d
+
+The SDK is licensed material downloaded from https://tak.gov. It cannot be
+fetched non-interactively — a person has to accept the licence. If you are an
+agent, this is the one step to ask for."
+
+for f in atak.apk android_keystore atak-gradle-takdev.jar; do
+    [ -e "$SDK/$f" ] || fail "SDK is missing $f" \
+"ATAK_SDK_DIR points at $SDK but that is not the root of the SDK. It must be
+the folder that directly contains atak.apk, android_keystore and
+atak-gradle-takdev.jar — often one level down from where the zip unpacked."
+done
+pass "SDK at $SDK"
+
+if [ -f "$SDK/VERSION.txt" ]; then
+    pass "SDK version $(tr -d '\r\n' < "$SDK/VERSION.txt")"
+fi
+
+section "Build tooling"
+
+command -v java >/dev/null || fail "no java" "The image is broken; rebuild it."
+pass "java $(java -version 2>&1 | head -1 | sed 's/.*"\(.*\)".*/\1/')"
+
+[ -d "${ANDROID_HOME:-/opt/android-sdk}" ] || fail "no Android SDK" \
+"The image is broken; rebuild it: docker compose build --no-cache"
+pass "Android SDK at ${ANDROID_HOME:-/opt/android-sdk}"
+
+section "Device"
+
+if ! command -v adb >/dev/null; then
+    fail "no adb" "The image is broken; rebuild it."
+fi
+
+DEVICES=$(adb devices 2>/dev/null | awk 'NR>1 && $2=="device" {print $1}')
+if [ -z "$DEVICES" ]; then
+    fail "adb sees no device" \
+"The emulator runs on the HOST, and the container reaches it through a
+forwarder. On the host:
+
+    adb -a -P 5037 server nodaemon &
+    emulator -avd <name> -gpu swiftshader_indirect
+
+The -a is what makes the server listen where the container can reach it.
+Use a google_apis image: aosp_atd renders a black framebuffer while
+uiautomator still reports a full view tree, so UI automation silently
+does nothing.
+
+If the emulator is running and this still fails, the bridge is down.
+Check ADB_BRIDGE_TARGET (currently ${ADB_BRIDGE_TARGET:-unset})."
+fi
+pass "adb sees $(printf '%s' "$DEVICES" | wc -l | tr -d ' ') device(s): $(echo $DEVICES | tr '\n' ' ')"
+
+ABI=$(adb shell getprop ro.product.cpu.abi 2>/dev/null | tr -d '\r')
+TAGS=$(adb shell getprop ro.build.tags 2>/dev/null | tr -d '\r')
+NAME=$(adb shell getprop ro.product.name 2>/dev/null | tr -d '\r')
+info "device is $NAME ($ABI, $TAGS)"
+case "$NAME" in
+    *atd*) printf '  WARN  aosp_atd renders nothing; UI automation will appear to work and will not.\n' ;;
+esac
+
+section "ATAK on the device"
+
+if ! adb shell pm path com.atakmap.app.civ >/dev/null 2>&1 \
+   || [ -z "$(adb shell pm path com.atakmap.app.civ 2>/dev/null | tr -d '\r')" ]; then
+    fail "ATAK is not installed" \
+"Install the SDK's build, not a release build:
+
+    adb install -r $SDK/atak.apk
+
+It must be this one. ATAK compares a plugin's signing certificate against its
+own, and a release ATAK will refuse a plugin signed with the SDK keystore —
+reporting it as \"Incompatible\", which sounds like a version problem."
+fi
+pass "ATAK installed: $(adb shell dumpsys package com.atakmap.app.civ 2>/dev/null | awk -F= '/versionName/{print $2; exit}' | tr -d '\r')"
+
+# The signature check is the one that saves the most time, so it is worth the
+# round trip: pull what is actually installed and compare its certificate to
+# the SDK's apk.
+if command -v apksigner >/dev/null 2>&1 || \
+   ls "${ANDROID_HOME:-/opt/android-sdk}"/build-tools/*/apksigner >/dev/null 2>&1; then
+    APKSIGNER=$(command -v apksigner 2>/dev/null \
+        || ls "${ANDROID_HOME:-/opt/android-sdk}"/build-tools/*/apksigner 2>/dev/null | tail -1)
+    REMOTE=$(adb shell pm path com.atakmap.app.civ 2>/dev/null | head -1 | sed 's/^package://' | tr -d '\r')
+    TMP=$(mktemp -d)
+    if adb pull "$REMOTE" "$TMP/installed.apk" >/dev/null 2>&1; then
+        digest() {
+            "$APKSIGNER" verify --print-certs "$1" 2>/dev/null \
+                | awk -F': ' '/SHA-256 digest/{print $2; exit}'
+        }
+        INSTALLED=$(digest "$TMP/installed.apk")
+        SDK_CERT=$(digest "$SDK/atak.apk")
+        if [ -n "$INSTALLED" ] && [ -n "$SDK_CERT" ]; then
+            if [ "$INSTALLED" = "$SDK_CERT" ]; then
+                pass "installed ATAK is signed with the SDK certificate"
+            else
+                rm -rf "$TMP"
+                fail "installed ATAK is signed with a different certificate" \
+"The ATAK on the device will refuse plugins built here, and will report them as
+\"Incompatible\" rather than as a signing problem.
+
+    adb uninstall com.atakmap.app.civ
+    adb install -r $SDK/atak.apk
+
+Uninstalling clears the data; ATAK may then prompt about encryption on first
+launch. Choose \"Remove and Quit\", then start it again."
+            fi
+        else
+            info "could not read certificates; skipping the signature check"
+        fi
+    fi
+    rm -rf "$TMP"
+fi
+
+section "Workspace"
+
+if [ -d /work ]; then
+    REPOS=$(find /work -maxdepth 2 -name .git -type d 2>/dev/null | wc -l | tr -d ' ')
+    pass "/work holds $REPOS git repositor$([ "$REPOS" = 1 ] && echo y || echo ies)"
+else
+    fail "/work is not mounted" "Set PLUGINS_DIR in .env, then: docker compose up -d"
+fi
+
+printf '\nAll checks passed.\n'
