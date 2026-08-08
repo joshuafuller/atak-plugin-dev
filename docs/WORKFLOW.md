@@ -3,16 +3,22 @@
 ## Scaffold
 
 Start from the SDK's template, which is the only shape the build system and the
-signing pipeline both expect:
+signing pipeline both expect.
+
+**On the host**, where `$ATAK_SDK_DIR` and `$PLUGINS_DIR` come from your
+`.env`. Neither variable exists inside the container, where the same paths are
+`/opt/atak-sdk` and `/work`:
 
 ```bash
+# HOST
 cp -r "$ATAK_SDK_DIR/samples/plugintemplate" "$PLUGINS_DIR/MyPlugin"
 cd "$PLUGINS_DIR/MyPlugin"
 cp template.local.properties local.properties
 ```
 
 Edit `local.properties` — it is per-project, is not committed, and a fresh
-clone fails confusingly without it:
+clone fails confusingly without it. The paths are **container** paths even
+though you are editing on the host, because the build runs in the container:
 
 ```properties
 sdk.dir=/opt/android-sdk
@@ -60,6 +66,7 @@ Gitignore what matches and copy it from `$ATAK_SDK` at build time.
 ## Build and load
 
 ```bash
+# CONTAINER
 deploy MyPlugin
 ```
 
