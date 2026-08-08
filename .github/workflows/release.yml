@@ -18,6 +18,7 @@ jobs:
     permissions:
       contents: write        # create the release PR, tag, and release
       pull-requests: write
+      actions: write         # dispatch publish-base.yml
     outputs:
       released: ${{ steps.release.outputs.release_created }}
       tag: ${{ steps.release.outputs.tag_name }}
@@ -34,3 +35,14 @@ jobs:
           # honouring the 0.1.0 in the manifest.
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+
+      - name: Publish the base image for this release
+        # A release created with GITHUB_TOKEN does not emit a `release` event
+        # that can start another workflow — GitHub suppresses that to prevent
+        # loops. workflow_dispatch is the documented exception, so ask for the
+        # publish explicitly rather than relying on a trigger that never fires.
+        if: steps.release.outputs.release_created == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.release.outputs.tag_name }}
+        run: gh workflow run publish-base.yml --repo "$GITHUB_REPOSITORY" -f tag="$TAG"

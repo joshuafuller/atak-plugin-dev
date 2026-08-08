@@ -208,8 +208,12 @@ free text. Use [Conventional Commits](https://www.conventionalcommits.org):
 | --- | --- |
 | `fix:` | patch — 0.1.0 to 0.1.1 |
 | `feat:` | minor — 0.1.0 to 0.2.0 |
-| `feat!:` or a `BREAKING CHANGE:` footer | major |
+| `feat!:` or a `BREAKING CHANGE:` footer | **while 0.x: minor.** After 1.0: major |
 | `docs:`, `chore:`, `test:`, `refactor:`, `ci:` | no release |
+
+Breaking changes bump the minor while the version is 0.x — semver treats 0.x as
+unstable, and `bump-minor-pre-major` in the config keeps that behaviour rather
+than burning 1.0 on the first incompatibility.
 
 `release-please` reads everything since the last tag, keeps `CHANGELOG.md` and
 `version.txt`, and opens a release PR. Merging that PR tags the release, which
