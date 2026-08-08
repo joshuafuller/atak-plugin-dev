@@ -3,9 +3,14 @@
 From nothing to a plugin you wrote, running inside ATAK on an emulator. Around
 an hour, most of it downloads.
 
-Every command is labelled **HOST** or **CONTAINER**. Getting that wrong is the
-most common way this goes sideways, because the two see different paths and
-different variables.
+Every command is labelled by **where you type it**: **HOST** is your own
+terminal, **CONTAINER** is a shell inside the container
+(`docker compose exec atak-dev bash`). A `docker compose exec …` line is
+therefore HOST — you type it on the host, and it runs the command inside.
+
+The distinction matters because the two see different paths and different
+variables: `$ATAK_SDK_DIR` exists only on the host, `/opt/atak-sdk` only in the
+container.
 
 ## What you are building, and why it is odd
 
@@ -93,7 +98,8 @@ cp .env.example .env
 
 Edit `.env`:
 
-```bash
+```ini
+# .env — file contents, not commands
 ATAK_SDK_DIR=/absolute/path/to/ATAK-CIV-5.8.0.1-SDK   # from step 1
 PLUGINS_DIR=/absolute/path/to/where/your/plugins/live # a folder, not one project
 ```
@@ -151,7 +157,7 @@ together, and the one activity you must not remove.
 ## 6. Build, install, load
 
 ```bash
-# CONTAINER
+# HOST
 docker compose exec atak-dev deploy MyPlugin
 ```
 
@@ -168,7 +174,7 @@ drawer.
 ## 7. Confirm it, and check yourself
 
 ```bash
-# CONTAINER
+# HOST
 docker compose exec atak-dev bash -lc 'adb logcat -d | rg "AtakPluginRegistry" | tail -5'
 ```
 
@@ -176,7 +182,7 @@ You want `SDK skipping signature check` and `Loaded <your class>`. If you see
 `signature mismatch`, go back to step 4.
 
 ```bash
-# CONTAINER — before your first commit
+# HOST — before your first commit
 docker compose exec atak-dev scan MyPlugin
 ```
 
@@ -191,6 +197,7 @@ history.
 Read the log, not the UI. Almost every failure has a specific line:
 
 ```bash
+# HOST
 adb logcat | rg "AtakPluginRegistry|PluginValidator"
 ```
 
