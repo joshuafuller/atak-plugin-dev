@@ -12,8 +12,18 @@ something else, what the licences allow, and the fact that ATAK's source is
 published and usually answers a question faster than an experiment:
 
 ```bash
+# Claude Code
 git clone https://github.com/joshuafuller/atak-plugin-skill \
     ~/.claude/skills/atak-plugin
+```
+
+Other agents discover skills elsewhere — Codex under `~/.codex/`, opencode
+under its own config directory. Clone it once and symlink it into whichever
+directory your agent actually reads, or it will never be found:
+
+```bash
+git clone https://github.com/joshuafuller/atak-plugin-skill ~/src/atak-plugin-skill
+ln -s ~/src/atak-plugin-skill ~/.claude/skills/atak-plugin   # adjust per agent
 ```
 
 ## What you cannot do, and must ask for
