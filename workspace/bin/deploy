@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# Build a plugin and put it on the device. Run inside the container:
+#
+#   /work/bin/deploy MapRoom
+#
+# Does the three things that are easy to forget: installs the APK, drops a copy
+# in ATAK's sideload folder so Sync Packages can see it, and removes any stale
+# copy of the same plugin left there by an earlier name.
+set -euo pipefail
+
+PROJECT="${1:-}"
+VARIANT="${2:-CivDebug}"
+SIDELOAD=/sdcard/atak/support/apks/sideloaded
+
+if [[ -z "$PROJECT" ]]; then
+    echo "usage: deploy <project-dir> [variant]   e.g. deploy MapRoom CivDebug" >&2
+    exit 2
+fi
+
+cd "/work/$PROJECT"
+
+# CivDebug -> flavour "civ", build type "debug". Resolving the output directory
+# from the variant rather than searching the whole tree matters: renaming a
+# project leaves artifacts under the old name behind, and a plain find will
+# happily deploy one of those.
+FLAVOUR=$(printf '%s' "$VARIANT" | sed -E 's/^([A-Z][a-z]*).*/\1/' | tr '[:upper:]' '[:lower:]')
+BUILD_TYPE=$(printf '%s' "$VARIANT" | sed -E 's/^[A-Z][a-z]*//' | tr '[:upper:]' '[:lower:]')
+OUT="app/build/outputs/apk/$FLAVOUR/$BUILD_TYPE"
+
+echo "==> assemble$VARIANT"
+./gradlew "assemble$VARIANT"
+
+mapfile -t APKS < <(find "$OUT" -maxdepth 1 -name '*.apk' 2>/dev/null | sort)
+if [[ ${#APKS[@]} -eq 0 ]]; then
+    echo "no APK in $OUT" >&2
+    exit 1
+fi
+if [[ ${#APKS[@]} -gt 1 ]]; then
+    echo "more than one APK in $OUT — stale output from a rename?" >&2
+    printf '  %s\n' "${APKS[@]}" >&2
+    echo "run './gradlew clean' and try again" >&2
+    exit 1
+fi
+APK="${APKS[0]}"
+echo "==> built $(basename "$APK")"
+
+echo "==> install"
+adb install -r "$APK"
+
+echo "==> stage for ATAK's sideload provider"
+adb shell "mkdir -p $SIDELOAD"
+# Clear older APKs for this same project so Sync Packages does not list two.
+adb shell "ls $SIDELOAD" 2>/dev/null | tr -d '\r' | while read -r existing; do
+    case "$existing" in
+        *"$PROJECT"*) adb shell "rm -f '$SIDELOAD/$existing'" ;;
+    esac
+done
+adb push "$APK" "$SIDELOAD/" >/dev/null
+echo "==> staged $(basename "$APK")"
+
+cat <<'NEXT'
+
+On the device, to pick it up:
+  hamburger menu -> Tools -> Plugins -> sync icon (top right) -> OK
+  tap the plugin row -> Load -> OK
+
+If the row says "Incompatible", ATAK is the release build. Install the SDK's
+atak.apk instead — see README.md, "The signing gate".
+NEXT

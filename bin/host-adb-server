@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Run this ON THE HOST, in its own terminal, before using adb in the container.
+#
+# The container talks to the host's adb server over TCP rather than running its
+# own, so that host and container share one view of the emulator. adb only
+# listens on all interfaces when started with -a, and only honours -a when
+# started explicitly as a server rather than auto-spawned by a client.
+set -euo pipefail
+
+adb kill-server 2>/dev/null || true
+echo "adb server listening on 0.0.0.0:5037 — leave this running"
+exec adb -a -P 5037 server nodaemon

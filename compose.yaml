@@ -1,10 +1,12 @@
 # ATAK plugin dev box.
 #
+#   cp .env.example .env      # point ATAK_SDK_DIR at your unzipped SDK
 #   docker compose up -d --build
 #   docker compose exec atak-dev bash
 #
-# host networking so adb reaches the emulator already running on the host
-# (adb server on 127.0.0.1:5037) without any port juggling.
+# See README.md. The short version: adb has to reach an emulator running on
+# the host, so start the host adb server with `adb -a -P 5037 server nodaemon`
+# before you expect `adb devices` to work inside the container.
 
 services:
   atak-dev:
@@ -12,19 +14,29 @@ services:
     container_name: atak-dev
     network_mode: host
     working_dir: /work
+
+    # Under WSL2 and Docker Desktop, network_mode: host does not actually share
+    # the host's network namespace, so host.docker.internal is how we reach the
+    # host adb server. On native Linux Docker with host networking the name is
+    # not resolvable by default, hence this mapping.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
     volumes:
       # The plugin source we are actually working on.
       - ./workspace:/work
-      # ATAK SDK — licensed material, mounted rather than baked in. Writable: the
-      # takdev gradle plugin writes mapping.txt into it during the build.
-      - /home/user/development/tak/ATAK-CIV-5.8.0.1-SDK:/opt/atak-sdk
+      # ATAK SDK — licensed material, mounted rather than baked in. Writable:
+      # the takdev gradle plugin writes mapping.txt into it during the build.
+      - ${ATAK_SDK_DIR:?set ATAK_SDK_DIR in .env}:/opt/atak-sdk
       # Persist the gradle cache across container rebuilds.
       - gradle-cache:/home/dev/.gradle
       # Reuse the host's adb keys so the emulator does not re-prompt.
-      - /home/user/.android:/home/dev/.android
+      - ${ANDROID_USER_HOME:-${HOME}/.android}:/home/dev/.android
+
     environment:
       ATAK_SDK: /opt/atak-sdk
-      ADB_SERVER_SOCKET: tcp:host.docker.internal:5037
+      ADB_SERVER_SOCKET: ${ADB_SERVER_SOCKET:-tcp:host.docker.internal:5037}
+
     stdin_open: true
     tty: true
 
